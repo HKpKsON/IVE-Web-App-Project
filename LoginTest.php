@@ -19,3 +19,5 @@ if($login !== false){
 }else{
 	echo 'Access Denied.';
 }
+
+?>
