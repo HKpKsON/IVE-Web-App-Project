@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class NewsLetter extends ModelBase
 {
-    public $uid;
+	public $uid;
 	public $breaking;	// SCMP Today and Breaking News Alerts
 	public $internation;	// SCMP Today International
 	public $tech;	// Tech Wrap
