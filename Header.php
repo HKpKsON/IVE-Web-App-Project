@@ -7,8 +7,10 @@ include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
 
 use \Repositories\UsersRepository;
 
+use \PDO;
+
 if(isset($_SESSION['uid'])){
-	$conn = new UsersRepository;
+	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
 	$login = $conn->find($_SESSION['uid']);
 	$pageName = "Welcome back, " . $login->displayname . "!";
 }
