@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class Subscription extends ModelBase
 {
-	public $uid;
+    public $uid;
     public $plan; // 0 = Digital Subscription, 1 = Print Subscription, 2 = Corporate Subscription
 	public $refer; // -1 = No Refer, UID = Paid by Referal
 	public $paymentDate;

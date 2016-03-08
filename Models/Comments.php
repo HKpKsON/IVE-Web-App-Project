@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class Comments extends ModelBase
 {
-	public $uid;
+    public $uid;
 	public $title;
 	public $publishdate;
 	public $lastupdate;

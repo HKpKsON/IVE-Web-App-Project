@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class Users extends ModelBase
 {
-	public $username;
+    public $username;
 	public $password; // Protected with SHA256(SHA256($password).$salt)."*".$salt (32L SALT)
 	public $salutation; // Mr. Mrs. Ms. etc
 	public $displayname;
