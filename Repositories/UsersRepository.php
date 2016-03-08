@@ -122,7 +122,12 @@ class UsersRepository extends RepositoryBase
         return $stmt->execute();
     }
 	
-	// Hash Salt Generator
+	/*	Hash Salt Generator
+	************************************************
+		$this->saltgen(salt_length)
+			return salt; [with length n]
+	************************************************
+		By KEN	*/
 	private function saltgen($length = 32)
 	{
 		$charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -136,7 +141,13 @@ class UsersRepository extends RepositoryBase
 		return $salt;
 	}
 	
-	// Find User's ID
+	/*	Username or Email to User ID
+	************************************************
+		$this->findid(user_username or user_email)
+			return user_id;	[If found]
+			return false;	[If not found]
+	************************************************
+		By KEN */
 	private function findid($info)
 	{
 		$stmt = $this->connection->prepare('
@@ -156,15 +167,31 @@ class UsersRepository extends RepositoryBase
 		return false;
 	}
 	
-	// Find User's Password Salt
+	/*	Find User's Password salt
+	************************************************
+		$this->findsalt(users_id)
+			return user_password_salt;	[If user found]
+			return false;	[If user not found]
+	************************************************
+		By KEN */
 	private function findsalt($id)
 	{
 		$user = $this->find($id);
-		$salt = substr($user->password, -32);
-		return $salt;
+		if($user != false){
+			$salt = substr($user->password, -32);
+			return $salt;
+		}
+		
+		return false;
 	}
 	
-	// Login Function
+	/*	Login Function
+	************************************************
+		$this->login(users_obj);
+			return user_id;	[If login sucess]
+			return false;	[If login failed]
+	************************************************
+		By KEN */
 	public function login($users)
     {
 		if(isset($users->email)){
@@ -203,4 +230,31 @@ class UsersRepository extends RepositoryBase
         return false;
     }
 
+	/* Adding User
+	************************************************
+		$this->adduser(users_obj);
+			return -1;	[If sucess]
+			return 0;	[If DB error]
+			return 1;	[If username taken]
+			return 2;	[If password is null]
+	************************************************
+	*/
+	public function adduser($users)
+	{
+		if($this->findid($users->username) != false){
+			return 1;
+		}elseif($users->password == null){
+			return 2;
+		}
+		
+		// Salting on password
+		$salt = $this->saltgen();
+		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*' . $salt;
+		
+		if($this->save($users) == false){
+			return 0;
+		}
+		
+		return -1;
+	}
 }

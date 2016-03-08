@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class Polls extends ModelBase
 {
-    public $title;
+	public $title;
 	public $publishdate;
 	public $lastupdate;
 	public $yes;

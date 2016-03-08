@@ -4,7 +4,7 @@ include_once "ModelBase.php";
 
 class PromoteCode extends ModelBase
 {
-    public $code;
+	public $code;
 	public $comment;
 	public $creationDate;
 	public $expireDate;
