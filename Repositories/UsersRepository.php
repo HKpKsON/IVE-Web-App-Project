@@ -121,4 +121,86 @@ class UsersRepository extends RepositoryBase
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+	
+	// Hash Salt Generator
+	private function saltgen($length = 32)
+	{
+		$charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charsetlength = strlen($charset);
+		$salt = '';
+		
+		for ($i = 0; $i < $length; $i++){
+			$salt .= $charset[rand(0, $charsetlength - 1)];
+		}
+		
+		return $salt;
+	}
+	
+	// Find User's ID
+	private function findid($info)
+	{
+		$stmt = $this->connection->prepare('
+            SELECT id
+             FROM users
+             WHERE email = :info
+			 OR username = :info
+        ');
+        $stmt->bindParam(':info', $info);
+        $stmt->execute();
+		
+		if($stmt->rowCount() == 1){
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $row['id'];
+		}
+		
+		return false;
+	}
+	
+	// Find User's Password Salt
+	private function findsalt($id)
+	{
+		$user = $this->find($id);
+		$salt = substr($user->password, -32);
+		return $salt;
+	}
+	
+	// Login Function
+	public function login($users)
+    {
+		if(isset($users->email)){
+			$id = $this->findid($users->email);
+		}else if(isset($users->username)){
+			$id = $this->findid($users->username);
+		}else{
+			return false;
+		}
+		
+		if($id == false || !isset($users->password)){
+			return false;
+		}else{
+			$salt = $this->findsalt($id);
+		}
+		
+		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*'  . $salt;
+		
+        $stmt = $this->connection->prepare('
+            SELECT id
+             FROM users
+             WHERE id = :id
+			 AND password = :password
+        ');
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $users->password);
+        $stmt->execute();
+		
+		$stmt->setFetchMode(PDO::FETCH_CLASS, '\Models\Users');
+		
+		if($stmt->rowCount() == 1){
+			$row = $stmt->fetch();
+			return $row->id;
+		}
+		
+        return false;
+    }
+
 }
