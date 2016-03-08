@@ -2,6 +2,17 @@
 session_start();
 //TODO: Add PHP Logic to handle the active navbar and breadcrumbs
 include_once('/Config.php');
+
+include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
+
+use \Repositories\UsersRepository;
+
+if(isset($_SESSION['uid'])){
+	$conn = new UsersRepository;
+	$login = $conn->find($_SESSION['uid']);
+	$pageName = "Welcome back, " . $login->displayname . "!";
+}
+
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
 ?>
 <!doctype html>
