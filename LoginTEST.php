@@ -11,7 +11,11 @@ use \Repositories\UsersRepository;
 
 use \PDO;
 
-if(isset($_GET['action'])){
+if(isset($_SESSION['uid'])){
+	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
+	$login = $conn->find($_SESSION['uid']);
+	echo "You have already logged in, " . $login->displayname . ".";
+}else if(isset($_GET['action'])){
 	$user = new Users;
 
 	if(isset($_POST['inputUsername'], $_POST['inputPassword'])){
