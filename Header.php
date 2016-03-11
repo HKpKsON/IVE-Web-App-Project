@@ -25,7 +25,7 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"
           crossorigin="anonymous">
-    <link href="css/site.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
 
     <script src="//code.jquery.com/jquery-2.2.0.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"
@@ -33,5 +33,8 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
     <?= function_exists('headerExtra') ? headerExtra() : "" ?>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 <!--Header End-->
+	<div class="header">
+		<h1><?= cfg::siteName ?></h1>
+	</div>
