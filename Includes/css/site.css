@@ -8,6 +8,11 @@ body {
 	padding-top: 20px;
 }
 
+#login-dialog {
+	top: 45%;
+	transform: translate(0, -50%)
+}
+
 .container {
 	width: 1280px;
 }

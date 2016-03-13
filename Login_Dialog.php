@@ -28,9 +28,10 @@ if(isset($_SESSION['uid'])){
 ?>
 <span type="button" class="btn btn-default" data-toggle="modal" data-target="#login-dialog">Login</span>
 <div class="modal fade" id="login-dialog" role="dialog">
-	<div class="modal-dialog">
+	<div id="login-dialog" class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h1>Please sign in</h1>
 				<hr />
 				<form class="form-signin" action="Login.php?action=login" method="POST">
