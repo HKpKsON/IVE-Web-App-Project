@@ -47,7 +47,7 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-2"><strong>Sun</strong> Mar 13, 2016</div>
+			<div class="col-md-2"><div id="Date"></div></div>
 			<div class="col-md-3">Jobs | Events | Education Courses</div>
 			<div class="col-md-2">Weather</div>
 			<div class="col-md-0">

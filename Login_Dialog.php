@@ -30,10 +30,9 @@ if(isset($_SESSION['uid'])){
 <div class="modal fade" id="login-dialog" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h2>Please sign in</h2>
-			</div>
 			<div class="modal-body">
+				<h1>Please sign in</h1>
+				<hr />
 				<form class="form-signin" action="Login.php?action=login" method="POST">
 						<label for="inputUsername" class="sr-only">Login</label>
 						<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
