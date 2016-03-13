@@ -9,8 +9,7 @@ body {
 }
 
 #login-dialog {
-	top: 45%;
-	transform: translate(0, -50%)
+	margin-top: 2.5%;
 }
 
 .container {
