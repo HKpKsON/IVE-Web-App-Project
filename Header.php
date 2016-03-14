@@ -50,8 +50,6 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 			<div class="col-md-2"><div id="Date"></div></div>
 			<div class="col-md-3">Jobs | Events | Education Courses</div>
 			<div class="col-md-2">Weather</div>
-			<div class="col-md-0">
-			</div>
 			<div class="col-md-3">
 				<div id="login"><?php include_once('Login_Dialog.php'); ?></div>
 			</div>

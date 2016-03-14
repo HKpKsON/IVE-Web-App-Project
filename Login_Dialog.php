@@ -28,7 +28,7 @@ if(isset($_SESSION['uid'])){
 ?>
 <span type="button" class="btn btn-default" data-toggle="modal" data-target="#login-dialog">Login</span>
 <div class="modal fade" id="login-dialog" role="dialog">
-	<div id="login-dialog" class="modal-dialog">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -48,7 +48,7 @@ if(isset($_SESSION['uid'])){
 						<button class="btn btn-lg btn-danger" type="button" data-dismiss="modal">Cancel</button>
 				</form>
 				<hr />
-				<h1>New Here?</h1>
+				<h1>No Account?</h1>
 				<span class="btn btn-lg btn-default">Subscribe</span>
 			</div>
 		</div>
