@@ -66,6 +66,8 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 				<div class="row page-header">
 					<h1><?= cfg::siteName ?></h1>
 				</div>
+				<!-- Navbar -->
+				<?php include_once("/Navbar.php") ?>
 		</div>
 		<!-- Desktop Topbar End -->
 		<!-- Mobile Topbar Start -->

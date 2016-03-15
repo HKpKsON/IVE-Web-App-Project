@@ -30,3 +30,19 @@ body {
 	background-color: #3333aa;
 	color: white;
 }
+
+.footer-bottom,
+.footer-bottom a {
+	margin-top: 4em;
+	background-color: #333333;
+	color: #fff;
+}
+
+.footer-nav {
+	margin-top: 1.5em;
+}
+
+.copyright {
+	margin-top: 6.5em;
+	margin-bottom: 1.5em;
+}
