@@ -1,5 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Header.php";
+// Because the sack of session, it must run before anything.
+// It supposed to load in Header.php, in case we need to use header(), we skip it.
+// Which means we need to start the session manually.
+isset($_GET['action']) ? session_start() : include_once $_SERVER['DOCUMENT_ROOT'] ."/Header.php";
 
 include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
 include_once $_SERVER['DOCUMENT_ROOT'] ."/Models/Users.php";
@@ -11,15 +14,8 @@ use \Repositories\UsersRepository;
 
 use \PDO;
 
-if(isset($_SESSION['uid'])){
-	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
-	$login = $conn->find($_SESSION['uid']);
-?>
-	<div class="alert alert-danger alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<strong>Opps!</strong> You have already logged in, <?= $login->displayname ?>.
-	</div>
-<?php
+if(!isset($_GET['error']) && isset($_SESSION['uid'])){
+	header('Location: ?error=logged');
 }else if(isset($_GET['action'])){
 	$user = new Users;
 
@@ -35,17 +31,16 @@ if(isset($_SESSION['uid'])){
 	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
 	$login = $conn->login($user);
 
+	if(isset($_POST['inputRemember'])){
+		setcookie('username', $_POST['inputUsername']);
+	}
+	
 	if($login !== false){
 		$_SESSION['uid'] = $login;
 		$user = $conn->find($login);
-		$goback = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-		header("Location: $goback");
+		header("Location: /");
 	}else{
 		header('Location: ?error=userpw');
-	}
-	
-	if(isset($_POST['inputRemember'])){
-		setcookie('username', $_POST['inputUsername']);
 	}
 }else{
 	$cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
@@ -72,6 +67,15 @@ if(isset($_SESSION['uid'])){
 				<div class="alert alert-danger alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<strong>Opps!</strong> Wrong Username or Password.
+				</div>
+				<?php } ?>
+				<?php
+					if(isset($_GET['error']) && $_GET['error'] == 'logged'){
+				?>
+				<hr />
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Opps!</strong> You have already logged in.
 				</div>
 				<?php } ?>
 		</form>
