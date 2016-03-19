@@ -46,11 +46,6 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 				<label for="inputEmail" class="sr-only">Email</label>
 				<input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required="" autofocus="" type="email">
 				<hr />
-				<label for="inputPassword" class="sr-only">Password</label>
-				<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
-				<label for="inputConPassword" class="sr-only">Confirm Password</label>
-				<input id="inputConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" required="" type="password">
-				<hr />
 				<button class="btn btn-lg btn-default btn-block" type="submit">Register</button>
 		</form>
 	</div>

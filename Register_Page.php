@@ -1,20 +1,19 @@
 <?php
-	session_start();
-	include_once('/Config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
-	$pageName = "Register";
+$pageName = "Register";
 	
-	//Set up page title!
-	$title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
+//Set up page title!
+$title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
 
-	//If you need header include other javascript or CSS
-	function headerExtra()
-	{
-		?>
+//If you need header include other javascript or CSS
+function headerExtra()
+{
+	?>
 
-		<?php
-	}
-	include_once $_SERVER['DOCUMENT_ROOT'] ."/Header.php";
+	<?php
+}
+include_once $_SERVER['DOCUMENT_ROOT'] ."/Header.php";
 ?>
 <div class="container">
 	<?php
@@ -41,9 +40,9 @@
 		<hr />
 		<div class="col-md-6">
 			<label for="inputUsername"><h3>Username</h3></label>
-			<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" type="text">
+			<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" type="text" value="<?= isset($refer) ? $refer['username']: ''; ?>">
 			<label for="inputEmail"><h3>Email</h3></label>
-			<input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required="" type="email">
+			<input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required="" type="email" value="<?= isset($refer) ? $refer['email']: ''; ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword"><h3>Password</h3></label>

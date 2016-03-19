@@ -2,6 +2,7 @@
 
 body {
 	font-family: 'Raleway', sans-serif;
+	padding-top: 32px;
 }
 
 #desktop-topbar {
@@ -10,10 +11,6 @@ body {
 
 #login-dialog {
 	margin-top: 2.5%;
-}
-
-.form-signin {
-	padding: 0px 50px 0px 50px;
 }
 
 .Date {
