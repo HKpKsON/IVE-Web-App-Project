@@ -1,8 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Models/Users.php";
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
-include_once('/Config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
 use \Models\Users;
 use \Repositories\UsersRepository;
@@ -18,7 +18,7 @@ if(isset($_SESSION['uid'])){
 	<?= $login->displayname ?> <span class="caret"></span>
 	</span>
 	<ul class="dropdown-menu">
-		<li><a href="#">My Profile</a></li>
+		<li><a href="/Profile.php">My Profile</a></li>
 		<li role="separator" class="divider"></li>
 		<li><a href="/Logout.php">Logout</a></li>
 	</ul>

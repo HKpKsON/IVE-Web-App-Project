@@ -1,8 +1,9 @@
 <?php
 
-function countryList($selected = "HK"){
-// http://www.freeformatter.com/iso-country-list-html-select.html
-	$countries = array(
+class Countries
+{
+	// http://www.freeformatter.com/iso-country-list-html-select.html
+	private $countries = array(
 		'AF' => 'Afghanistan',
 		'AX' => 'Åland Islands',
 		'AL' => 'Albania',
@@ -254,18 +255,33 @@ function countryList($selected = "HK"){
 		'ZW' => 'Zimbabwe'
 	);
 	
-	echo "<select class=\"form-control\" name=\"inputCountry\">";
-	
-	foreach($countries as $key => $country){
-		echo "<option value=\"$key\">$country</option>";
+	public function displayForm($selected = "HK"){
+		echo "<select class=\"form-control\" name=\"inputCountry\">";
 		
-		if($key == $selected){
-			echo "<option value=\"$key\" selected>$country</option>";
+		foreach($this->countries as $key => $country){
+			if($key == $selected){
+				echo "<option value=\"$key\" selected>$country</option>";
+			}else{
+				echo "<option value=\"$key\">$country</option>";
+			}
 		}
+		
+		echo "</select>";
 	}
-	unset($countries);
 	
-	echo "</select>";
+	public function vaildCountryCode($country){
+		if(isset($this->countries[$country]))
+			return true;
+		
+		return false;
+	}
+	
+	public function getCountryName($code){
+		if(isset($this->countries[$code]))
+			return $this->countries[$code];
+		
+		return false;
+	}
 }
 
 ?>

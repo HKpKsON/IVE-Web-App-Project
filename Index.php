@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
 use \Repositories\UsersRepository;
@@ -23,7 +23,7 @@ function headerExtra()
     <?php
 }
 ?>
-<?php include_once('Header.php'); ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php'); ?>
 <br />
 <br />
 <br />
@@ -60,4 +60,17 @@ function headerExtra()
 <br />
 <br />
 <br />
-<?php include_once('Footer.php'); ?>
+<?php
+//If you need add javascript before the end of body!
+function bodyEndExtra()
+{
+    ?>
+    <script>
+        console.log("This is Body End code");
+    </script>
+
+    <?php
+}
+
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Footer.php');
+?>

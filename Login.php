@@ -1,12 +1,4 @@
 <?php
-session_start();
-include_once('/Config.php');
-
-$pageName = "Login";
-
-//Set up page title!
-$title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
-
 //If you need header include other javascript or CSS
 function headerExtra()
 {
@@ -16,10 +8,11 @@ function headerExtra()
 }
 ?>
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Models/Users.php";
+session_start();
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
-include_once('/Config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
 use \Models\Users;
 use \Repositories\UsersRepository;
@@ -55,6 +48,6 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		header('Location: ?error=userpw');
 	}
 }else{
-	include_once $_SERVER['DOCUMENT_ROOT'] ."/Login_Page.php";
+	include_once($_SERVER['DOCUMENT_ROOT'] ."/Pages/Login_Page.php");
 }
 ?>

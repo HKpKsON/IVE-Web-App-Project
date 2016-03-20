@@ -1,8 +1,23 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Header.php";
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
+
+$pageName = 'Login';
+
+//Set up page title!
+$title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::siteName . ' (School Project)';
+
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 ?>
 <div class="container">
+	<?php
+	if(isset($_GET['success']) && $_GET['success'] == 'true'){
+	?>
+	<div class="alert alert-success alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Congratulations!</strong> You have sucessfully registered, welcome aborad!
+	</div>
+	<?php } ?>
 	<div class="col-md-6">
 		<form class="form-signin" action="?action=login" method="POST">
 				<h2 class="form-signin-heading">Please sign in</h2>
@@ -35,6 +50,15 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 					<strong>Opps!</strong> You have already logged in.
 				</div>
 				<?php } ?>
+				<?php
+					if(isset($_GET['error']) && $_GET['error'] == 'nologin'){
+				?>
+				<hr />
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Opps!</strong> Please login to view this page!
+				</div>
+				<?php } ?>
 		</form>
 	</div>
 	<div class="col-md-6">
@@ -50,4 +74,17 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 		</form>
 	</div>
 </div>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] ."/Footer.php"; ?>
+<?php
+//If you need add javascript before the end of body!
+function bodyEndExtra()
+{
+    ?>
+    <script>
+        console.log("This is Body End code");
+    </script>
+
+    <?php
+}
+
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Footer.php');
+?>

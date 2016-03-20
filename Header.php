@@ -43,7 +43,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 				</div>
 				<div class="col-md-3 text-right">
 					<div id="login">
-						<?php include_once('Login_Dialog.php'); ?>
+						<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Login_Dialog.php'); ?>
 						<a href="#" class="btn btn-default" title="Follow on Facebook"><i class="fa fa-facebook"></i></a>
 						<a href="#" class="btn btn-default" title="Follow on Twitter"><i class="fa fa-twitter"></i></a>
 					</div>
@@ -52,13 +52,13 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 					<h1><?= cfg::siteName ?></h1>
 				</div>
 				<!-- Navbar -->
-				<?php include_once("/Navbar.php") ?>
+				<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Navbar.php') ?>
 		</div>
 		<!-- Desktop Topbar End -->
 		<!-- Mobile Topbar Start -->
 		<div id="mobile-topbar" class="row hidden-md hidden-lg">
 			<!-- Moblie Navbar -->
-			<?php include_once("/Navbar_SM.php") ?>
+			<?php include_once("/Pages/Navbar_SM.php") ?>
 			<div class="page-header">
 				<h3 class="text-center"><?= cfg::siteName ?></h3>
 			</div>
@@ -66,7 +66,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 				<div class="Date"></div>
 			</div>
 			<div class="col-xs-6 text-right">
-				<?php include_once('Login_Dialog_SM.php'); ?>
+				<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Login_Dialog_SM.php'); ?>
 			</div>
 		</div>
 		<!-- Mobile Topbar End -->

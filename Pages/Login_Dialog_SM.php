@@ -1,8 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Repositories/UsersRepository.php";
-include_once $_SERVER['DOCUMENT_ROOT'] ."/Models/Users.php";
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
-include_once('/Config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
 use \Models\Users;
 use \Repositories\UsersRepository;
@@ -13,7 +13,7 @@ if(isset($_SESSION['uid'])){
 	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
 	$login = $conn->find($_SESSION['uid']);
 ?>
-<a href="#">My Profile</a>
+<a href="/Profile.php">My Profile</a>
 <span>|</span>
 <a href="/Logout.php">Logout</a>
 <?php

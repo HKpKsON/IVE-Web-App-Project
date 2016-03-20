@@ -128,7 +128,7 @@ class UsersRepository extends RepositoryBase
 			return salt; [with length n]
 	************************************************
 		By KEN	*/
-	private function saltgen($length = 32)
+	public function saltgen($length = 32)
 	{
 		$charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charsetlength = strlen($charset);
@@ -148,7 +148,7 @@ class UsersRepository extends RepositoryBase
 			return false;	[If not found]
 	************************************************
 		By KEN */
-	private function findid($info)
+	public function findid($info)
 	{
 		$stmt = $this->connection->prepare('
             SELECT id
@@ -208,7 +208,7 @@ class UsersRepository extends RepositoryBase
 			$salt = $this->findsalt($id);
 		}
 		
-		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*'  . $salt;
+		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*' . $salt;
 		
         $stmt = $this->connection->prepare('
             SELECT id
