@@ -10,7 +10,7 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 function headerExtra()
 {
 	?>
-
+	<script src='//www.google.com/recaptcha/api.js'></script>
 	<?php
 }
 
@@ -28,7 +28,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 				"empty" => "<strong>Opps!</strong> You Forgot to fill up the Form!",
 				"username" => "<strong>Opps!</strong> There is something wrong with your Username!",
 				"email" => "<strong>Opps!</strong> There is something wrong with your Email!",
-				"server" => "<strong>Oh no!</strong> The server room is on fire!"
+				"server" => "<strong>Oh no!</strong> The server room is on fire!",
+				"recaptcha" => "<strong>Opps!</strong> Please proof that you are not a robot!"
 			);
 			
 			if(isset($errormsg[$_GET['error']])){
@@ -77,6 +78,10 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 				$countrylist = new Countries;
 				$countrylist->displayForm();
 			?>
+		</div>
+		<div class="col-md-6">
+			<br />
+			<div class="g-recaptcha" data-sitekey="6Le6ShsTAAAAABNekfeYmWEfP9RBLytL58XrYPMu"></div>
 		</div>
 		<div class="col-md-12">
 			<hr />

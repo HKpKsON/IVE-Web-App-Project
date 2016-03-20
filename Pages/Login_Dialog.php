@@ -15,7 +15,7 @@ if(isset($_SESSION['uid'])){
 ?>
 <div class="btn-group">
 	<span class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	<?= $login->displayname ?> <span class="caret"></span>
+	<?= $login->salutation ?> <?= $login->displayname ?> <span class="caret"></span>
 	</span>
 	<ul class="dropdown-menu">
 		<li><a href="/Profile.php">My Profile</a></li>
@@ -47,6 +47,7 @@ if(isset($_SESSION['uid'])){
 						  <label>
 							<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
 						  </label>
+						  <a class="text-right" href="/FogetPassword.php">Forget Password?</a>
 						</div>
 						<button class="btn btn-lg btn-success" type="submit">Sign in</button>
 						<button class="btn btn-lg btn-danger" type="button" data-dismiss="modal">Cancel</button>

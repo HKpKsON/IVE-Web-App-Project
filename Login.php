@@ -1,13 +1,4 @@
 <?php
-//If you need header include other javascript or CSS
-function headerExtra()
-{
-    ?>
-
-    <?php
-}
-?>
-<?php
 session_start();
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
@@ -21,7 +12,7 @@ use \PDO;
 
 if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 	header('Location: ?error=logged');
-}else if(isset($_GET['action'])){
+}else if(isset($_GET['action']) && $_GET['action'] == 'login'){
 	$user = new Users;
 
 	if(isset($_POST['inputUsername'], $_POST['inputPassword'])){
@@ -44,8 +35,10 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		$_SESSION['uid'] = $login;
 		$user = $conn->find($login);
 		header("Location: /");
+		die();
 	}else{
 		header('Location: ?error=userpw');
+		die();
 	}
 }else{
 	include_once($_SERVER['DOCUMENT_ROOT'] ."/Pages/Login_Page.php");

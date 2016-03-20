@@ -36,8 +36,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		<?php
 		if(isset($_GET['error'])){
 			$errormsg = array(
-				"registered" => "<strong>Sorry</strong>, but the Username you choose was registed.",
-				"password" => "<strong>Opps!</strong> There is something wrong with your password!",
+				"wrongpw" => "<strong>Sorry</strong>, the password you type is not your current password!",
+				"password" => "<strong>Opps!</strong> There is something wrong with your new password!",
 				"empty" => "<strong>Opps!</strong> You Forgot to fill up the Form!",
 				"username" => "<strong>Opps!</strong> There is something wrong with your Username!",
 				"email" => "<strong>Opps!</strong> There is something wrong with your Email!",
@@ -55,6 +55,14 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 			unset($errormsg);
 		}
 		?>
+		<?php
+			if(isset($_GET['success']) && $_GET['success'] == 'true'){
+		?>
+		<div class="alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Done!</strong> Profile updated successfully!
+		</div>
+		<?php } ?>
 		<div id="error-dialog"></div>
 		<div class="col-md-6">
 			<label for="inputDisplayName"><h3>Display Name</h3></label>
@@ -64,9 +72,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword"><h3>Change Password</h3></label>
-			<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" type="password" required="">
+			<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" type="password">
 			<label for="inputConPassword"><h3>Confirm Password</h3></label>
-			<input id="inputConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" type="password" required="">
+			<input id="inputConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" type="password">
 		</div>
 		<div class="col-md-12"><hr /></div>
 		<div class="col-md-6">
@@ -89,9 +97,13 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 				$countrylist->displayForm($user->country);
 			?>
 		</div>
+		<div class="col-md-12">
+			<label for="inputAddress"><h3>Address:</h3></label>
+			<input id="inputAddress" name="inputAddress" class="form-control" placeholder="Example: Flat 10A, 10/F, Ventris Court,Ventris Road, Happy Valley, Hong Kong" type="text" value="<?= $user->address ?>">
+		</div>
 		<div class="col-md-12"><hr /></div>
 		<div class="col-md-8 col-md-offset-2">
-			<label for="inputLogin"><h3>Please retype your password to save:</h3></label>
+			<label for="inputLogin"><h3>Please retype your current password to save:</h3></label>
 			<input id="inputLogin" name="inputLogin" class="form-control" placeholder="Login Password" type="password" required="">
 		</div>
 		<div class="col-md-12"><hr /></div>
@@ -109,7 +121,7 @@ function bodyEndExtra()
 {
     ?>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
-	<script src="Includes/js/register.js"></script>
+	<script src="Includes/js/profile.js"></script>
     <script>
         console.log("This is Body End code");
     </script>

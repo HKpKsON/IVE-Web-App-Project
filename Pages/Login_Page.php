@@ -6,6 +6,14 @@ $pageName = 'Login';
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::siteName . ' (School Project)';
 
+//If you need header include other javascript or CSS
+function headerExtra()
+{
+    ?>
+
+    <?php
+}
+
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 ?>
@@ -30,6 +38,7 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 				  <label>
 					<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
 				  </label>
+				  <a class="text-right" href="/FogetPassword.php">Forget Password?</a>
 				</div>
 				<button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
 				<?php

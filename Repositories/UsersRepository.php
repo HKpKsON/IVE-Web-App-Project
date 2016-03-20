@@ -184,6 +184,17 @@ class UsersRepository extends RepositoryBase
 		
 		return false;
 	}
+
+	/*	HASH & SALT Password
+	************************************************
+		$this->hashnsalt(password, salt)
+			return hashed and salted password;
+	************************************************
+		By KEN */
+	public function hashnsalt($password, $salt)
+	{
+		return hash('sha256', hash('sha256', $password) . $salt) . '*' . $salt;
+	}
 	
 	/*	Login Function
 	************************************************
@@ -198,8 +209,8 @@ class UsersRepository extends RepositoryBase
 			$id = $this->findid($users->email);
 		}else if(isset($users->username)){
 			$id = $this->findid($users->username);
-		}else{
-			return false;
+		}else if(isset($users->id)){
+			$id = $users->id;
 		}
 		
 		if($id == false || !isset($users->password)){
@@ -208,7 +219,7 @@ class UsersRepository extends RepositoryBase
 			$salt = $this->findsalt($id);
 		}
 		
-		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*' . $salt;
+		$users->password = $this->hashnsalt($users->password ,$salt);
 		
         $stmt = $this->connection->prepare('
             SELECT id
@@ -249,7 +260,7 @@ class UsersRepository extends RepositoryBase
 		
 		// Salting on password
 		$salt = $this->saltgen();
-		$users->password = hash('sha256', hash('sha256', $users->password) . $salt) . '*' . $salt;
+		$users->password = $this->hashnsalt($users->password ,$salt);
 		
 		if($this->save($users) == false){
 			return 0;
