@@ -63,8 +63,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 						$mail->isHTML(true);                                  // Set email format to HTML
 
 						$mail->Subject = $user->salutation . ' ' . $user->displayname . ', You have requested a password recovery.';
-						$mail->Body =	'This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired.
-										<br />Please goto this location <a href="http://localhost:8080/FogetPassword.php?action=resetpassword">Reset Password</a> to reset your password.';
+						$mail->Body =	'<p>This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired. Please goto this location <a href="http://localhost:8080/FogetPassword.php?action=resetpassword">Reset Password</a> to reset your password.</p>';
 						$mail->AltBody = 'This is your code: ['.$result.'], this code will be expired in 48 hours. Any code you have requested before will be expired. http://localhost:8080/FogetPassword.php?action=resetpassword';
 
 						if(!$mail->send()) {
@@ -97,7 +96,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		$response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$privatekey."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
 		
 		if(isset($_POST['g-recaptcha-response'])){
-			if($response['success'] == false && FALSE){
+			if($response['success'] == false){
 				header("Location: ?action=resetpassword&error=recaptcha");
 				die();
 			}else{
