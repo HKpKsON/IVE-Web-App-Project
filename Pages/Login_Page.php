@@ -28,7 +28,7 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 	<?php } ?>
 	<div class="col-md-6">
 		<form class="form-signin" action="?action=login" method="POST">
-				<h2 class="form-signin-heading">Please sign in</h2>
+				<h2 class="form-signin-heading"><?= $pageName ?></h2>
 				<hr />
 				<label for="inputUsername" class="sr-only">Username</label>
 				<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
@@ -42,32 +42,24 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 				</div>
 				<button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
 				<?php
-					if(isset($_GET['error']) && $_GET['error'] == 'userpw'){
+				if(isset($_GET['error'])){
+					$errormsg = array(
+						"userpw" => "<strong>Opps!</strong> Wrong Username or Password.",
+						"logged" => "<strong>Opps!</strong> You have already logged in.",
+						"nologin" => "<strong>Opps!</strong> Please login to view this page!"
+					);
+					
+					if(isset($errormsg[$_GET['error']])){
 				?>
-				<hr />
-				<div class="alert alert-danger alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Opps!</strong> Wrong Username or Password.
-				</div>
-				<?php } ?>
-				<?php
-					if(isset($_GET['error']) && $_GET['error'] == 'logged'){
-				?>
-				<hr />
 				<div class="alert alert-danger alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Opps!</strong> You have already logged in.
+					<?= $errormsg[$_GET['error']]; ?>
 				</div>
-				<?php } ?>
 				<?php
-					if(isset($_GET['error']) && $_GET['error'] == 'nologin'){
+					}
+					unset($errormsg);
+				}
 				?>
-				<hr />
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Opps!</strong> Please login to view this page!
-				</div>
-				<?php } ?>
 		</form>
 	</div>
 	<div class="col-md-6">

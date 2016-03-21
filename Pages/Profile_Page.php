@@ -31,7 +31,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
 <div class="container">
 	<form class="form-profile" action="?action=update" method="POST">
-		<h2 class="form-profile-heading">My Profile</h2>
+		<h2 class="form-profile-heading"><?= $pageName ?></h2>
 		<hr />
 		<?php
 		if(isset($_GET['error'])){

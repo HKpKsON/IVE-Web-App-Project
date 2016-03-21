@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 	
-$pageName = 'Forget Password';
+$pageName = 'Reset Password';
 
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::siteName . ' (School Project)';
@@ -17,14 +17,16 @@ function headerExtra()
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
 <div class="container">
-	<form class="form-register" action="?action=findmypassword" method="POST">
+	<form class="form-register" action="?action=resetpassword" method="POST">
 		<h2 class="form-register-heading"><?= $pageName ?></h2>
 		<hr />
 		<?php
 		if(isset($_GET['error'])){
 			$errormsg = array(
 				"recaptcha" => "<strong>Opps!</strong> Please proof that you are not a robot!",
-				"nosuchmember" => "<strong>Opps!</strong> There is no such user!",
+				"nosuchcode" => "<strong>Opps!</strong> There is no such reset code!",
+				"expired" => "<strong>Opps!</strong> Your code is either expired or used.",
+				"password" => "<strong>Opps!</strong> There is something wrong with your password!",
 				"empty" => "<strong>Opps!</strong> You forgot to fill up the form!",
 				"server" => "<strong>Oh no!</strong> The server room is on fire!"
 			);
@@ -45,17 +47,18 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		?>
 		<div class="alert alert-success alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>It's alright,</strong> an email was sent to your email inbox. Please check out the link inside the email in order to reset your password.
+			<strong>Done!</strong> You have just reset your password!
 		</div>
 		<?php } ?>
-		
 		<div class="col-md-6">
-			<label for="inputUsername"><h3>Username</h3></label>
-			<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" type="text" required="">
-			<label for="inputEmail"><h3>Email</h3></label>
-			<input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" type="email" required="">
+			<label for="inputPassword"><h3>Password</h3></label>
+			<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" type="password" required="">
+			<label for="inputConPassword"><h3>Confirm Password</h3></label>
+			<input id="inputConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" type="password" required="">
 		</div>
 		<div class="col-md-6">
+			<label for="inputCode"><h3>Code</h3></label>
+			<input id="inputCode" name="inputCode" class="form-control" placeholder="Code" type="text" required="">
 			<p>
 				<label for="inputUsername"><h3>Proof that your are human:</h3></label>
 				<div class="g-recaptcha" data-sitekey="6Le6ShsTAAAAABNekfeYmWEfP9RBLytL58XrYPMu"></div>
@@ -63,7 +66,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		</div>
 		<div class="col-md-12">
 			<hr />
-			<button class="btn btn-lg btn-danger btn-block" type="submit">Please reset my password!</button>
+			<button class="btn btn-lg btn-danger btn-block" type="submit">Reset Password</button>
 		</div>
 	</form>
 </div>

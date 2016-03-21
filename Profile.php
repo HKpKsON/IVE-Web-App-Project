@@ -10,11 +10,12 @@ use \Models\Users;
 use \Repositories\UsersRepository;
 
 use \PDO;
+$PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd);
 
 if(!isset($_SESSION['uid'])){
 	header('Location: /Login.php?error=nologin');
 }elseif(isset($_GET['action']) && $_GET['action'] == 'update' && isset($_POST['inputLogin'])){
-	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
+	$conn = new UsersRepository($PDO);
 	$user = new Users;
 	
 	$user->id = $_SESSION['uid'];

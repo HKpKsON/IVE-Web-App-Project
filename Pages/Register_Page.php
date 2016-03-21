@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
-$pageName = 'Register';
+$pageName = 'Subscribe';
 	
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
@@ -18,7 +18,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
 <div class="container">
 	<form class="form-register" action="?action=register" method="POST">
-		<h2 class="form-register-heading">Subscribe</h2>
+		<h2 class="form-register-heading"><?= $pageName ?></h2>
 		<hr />
 		<?php
 		if(isset($_GET['error'])){

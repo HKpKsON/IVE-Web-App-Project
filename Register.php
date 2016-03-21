@@ -13,6 +13,7 @@ use \Models\Users;
 use \Repositories\UsersRepository;
 
 use \PDO;
+$PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd);
 
 if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 	header('Location: /Login.php?error=logged');
@@ -39,7 +40,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 			die();
 		}else{
 			$user = new Users;
-			$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
+			$conn = new UsersRepository($PDO);
 			
 			$user->username = $_POST['inputUsername'];
 			$user->email = $_POST['inputEmail'];

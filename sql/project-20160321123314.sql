@@ -2,10 +2,10 @@
 -- version 4.0.4.2
 -- http://www.phpmyadmin.net
 --
--- 主機: localhost
--- 產生日期: 2016 年 03 月 20 日 15:00
--- 伺服器版本: 5.6.13
--- PHP 版本: 5.4.17
+-- Host: localhost
+-- Generation Time: Mar 21, 2016 at 12:33 PM
+-- Server version: 5.6.13
+-- PHP Version: 5.4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 資料庫: `project`
+-- Database: `project`
 --
 CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `project`;
@@ -25,15 +25,15 @@ USE `project`;
 -- --------------------------------------------------------
 
 --
--- 表的結構 `ads`
+-- Table structure for table `ads`
 --
 
 CREATE TABLE IF NOT EXISTS `ads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `publishdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `media` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `url` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `company` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `media` varchar(1024) NOT NULL,
+  `url` varchar(1024) NOT NULL,
+  `company` varchar(256) NOT NULL,
   `expireDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -41,58 +41,58 @@ CREATE TABLE IF NOT EXISTS `ads` (
 -- --------------------------------------------------------
 
 --
--- 表的結構 `catagories`
+-- Table structure for table `catagories`
 --
 
 CREATE TABLE IF NOT EXISTS `catagories` (
-  `tag` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  `displayname` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `tag` varchar(32) NOT NULL,
+  `displayname` varchar(64) NOT NULL,
   PRIMARY KEY (`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` int(11) NOT NULL DEFAULT '-1',
-  `title` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(128) NOT NULL,
   `publishdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `content` mediumtext COLLATE utf8_general_ci NOT NULL,
+  `content` mediumtext NOT NULL,
   `type` int(8) NOT NULL DEFAULT '1',
   `newsId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `author` (`author`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(512) COLLATE utf8_general_ci NOT NULL,
-  `subtitle` varchar(512) COLLATE utf8_general_ci DEFAULT NULL,
+  `title` varchar(512) NOT NULL,
+  `subtitle` varchar(512) DEFAULT NULL,
   `publishdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `author` int(11) NOT NULL DEFAULT '-1',
-  `content` mediumtext COLLATE utf8_general_ci,
-  `tags` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
+  `content` mediumtext,
+  `tags` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `author` (`author`),
   KEY `tags` (`tags`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `newsletter`
+-- Table structure for table `newsletter`
 --
 
 CREATE TABLE IF NOT EXISTS `newsletter` (
@@ -106,43 +106,43 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
   `chns` tinyint(1) NOT NULL DEFAULT '0',
   `chnt` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `polls`
+-- Table structure for table `polls`
 --
 
 CREATE TABLE IF NOT EXISTS `polls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(512) COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(512) NOT NULL,
   `publishdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `yes` int(11) NOT NULL DEFAULT '0',
   `no` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `promotecode`
+-- Table structure for table `promotecode`
 --
 
 CREATE TABLE IF NOT EXISTS `promotecode` (
-  `code` varchar(64) COLLATE utf8_general_ci NOT NULL,
-  `comment` varchar(256) COLLATE utf8_general_ci DEFAULT NULL,
+  `code` varchar(64) NOT NULL,
+  `comment` varchar(256) DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expireDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `vaild` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `subscription`
+-- Table structure for table `subscription`
 --
 
 CREATE TABLE IF NOT EXISTS `subscription` (
@@ -152,77 +152,100 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `refer` int(11) NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expireDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `promoCode` varchar(128) COLLATE utf8_general_ci DEFAULT NULL,
+  `promoCode` varchar(128) DEFAULT NULL,
   `price` int(11) NOT NULL DEFAULT '0',
   `paymentMethod` int(11) NOT NULL DEFAULT '0',
-  `invoiceID` varchar(256) COLLATE utf8_general_ci DEFAULT NULL,
+  `invoiceID` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   KEY `refer` (`refer`),
   KEY `promoCode` (`promoCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(128) COLLATE utf8_general_ci DEFAULT NULL,
-  `salutation` varchar(16) COLLATE utf8_general_ci DEFAULT NULL,
-  `displayname` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT 'User',
-  `email` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
-  `address` varchar(1024) COLLATE utf8_general_ci DEFAULT NULL,
-  `fullname` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
-  `phone` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
-  `country` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(64) NOT NULL,
+  `password` varchar(128) DEFAULT NULL,
+  `salutation` varchar(16) DEFAULT NULL,
+  `displayname` varchar(64) NOT NULL DEFAULT 'User',
+  `email` varchar(64) DEFAULT NULL,
+  `address` varchar(1024) DEFAULT NULL,
+  `fullname` varchar(64) DEFAULT NULL,
+  `phone` varchar(32) DEFAULT NULL,
+  `country` varchar(32) DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `openid` varchar(256) COLLATE utf8_general_ci DEFAULT NULL,
+  `openid` varchar(256) DEFAULT NULL,
   `isAdmin` int(8) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 轉存資料表中的資料 `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `salutation`, `displayname`, `email`, `address`, `fullname`, `phone`, `country`, `creationDate`, `openid`, `isAdmin`) VALUES
-(-1, 'siteadmin', 'b46eae72a089cbd18afc5a720ffb61a36fb0c6cc06b3b719f3a30b36a23e7d6d*bE2aYaq9buVFxNQOxbuSMGogMR75fCx8', 'Mr.', 'SiteAdmin', 'admin@this.site', NULL, 'Site Admin', NULL, NULL, '2016-03-06 18:18:01', NULL, 255);
+(-1, 'siteadmin', '3b5fe2d5c4a3c17ce9caaab42ca1e22787a9d5e47cd091a90ba166678e72841c*tCz8L4unVnJtIUJwkuv5ustipFDJNtsu', 'Mr.', 'Site Admin', 'kenhasbeenused@gmail.com', '', 'Site Admin', '', 'AF', '2016-03-06 18:18:01', NULL, 255);
+
+-- --------------------------------------------------------
 
 --
--- 匯出資料表的 Constraints
+-- Table structure for table `verifications`
+--
+
+CREATE TABLE IF NOT EXISTS `verifications` (
+  `code` varchar(255) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `type` int(8) NOT NULL,
+  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expireDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `vaild` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`code`),
+  KEY `uid` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- 資料表的 Constraints `comments`
+-- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`);
 
 --
--- 資料表的 Constraints `news`
+-- Constraints for table `news`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_2` FOREIGN KEY (`tags`) REFERENCES `catagories` (`tag`),
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`);
 
 --
--- 資料表的 Constraints `newsletter`
+-- Constraints for table `newsletter`
 --
 ALTER TABLE `newsletter`
   ADD CONSTRAINT `newsletter_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`);
 
 --
--- 資料表的 Constraints `subscription`
+-- Constraints for table `subscription`
 --
 ALTER TABLE `subscription`
   ADD CONSTRAINT `subscription_ibfk_3` FOREIGN KEY (`promoCode`) REFERENCES `promotecode` (`code`),
   ADD CONSTRAINT `subscription_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `subscription_ibfk_2` FOREIGN KEY (`refer`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `verifications`
+--
+ALTER TABLE `verifications`
+  ADD CONSTRAINT `verifications_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
