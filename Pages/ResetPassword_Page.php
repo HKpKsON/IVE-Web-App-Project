@@ -60,7 +60,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 			<label for="inputCode"><h3>Code</h3></label>
 			<input id="inputCode" name="inputCode" class="form-control" placeholder="Code" type="text" required="">
 			<p>
-				<label for="inputUsername"><h3>Proof that your are human:</h3></label>
+				<label for="inputRecaptcha"><h3>Proof that your are human:</h3></label>
 				<div class="g-recaptcha" data-sitekey="6Le6ShsTAAAAABNekfeYmWEfP9RBLytL58XrYPMu"></div>
 			</p>
 		</div>

@@ -20,14 +20,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 	<hr />
 	<div class="panel panel-success">
 		<div class="panel-heading panel-title">You have been logged out.</div>
-	<?php if(isset($_GET['reason']) && $_GET['reason'] == 'user'){ ?>
-		<div class="panel-body h4">Reason: You clicked the Logout button.</div>
-	<?php } ?>
 	<?php if(isset($_GET['reason']) && $_GET['reason'] == 'idle'){ ?>
 		<div class="panel-body h4">Reason: You have no activity for too long!</div>
-	<?php } ?>
-	<?php if(isset($_GET['reason']) && $_GET['reason'] == 'timeout'){ ?>
+	<?php }elseif(isset($_GET['reason']) && $_GET['reason'] == 'timeout'){ ?>
 		<div class="panel-body h4">Reason: This session has been timeout.</div>
+	<?php }else{ ?>
+		<div class="panel-body h4">Reason: You clicked the Logout button.</div>
 	<?php } ?>
 		<a href="/"><div class="panel-footer text-center">Click me to go back to the homepage</div></a>
 	</div>

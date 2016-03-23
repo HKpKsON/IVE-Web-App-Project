@@ -41,16 +41,16 @@ class VerificationsRepository extends RepositoryBase
 		
         $stmt = $this->connection->prepare('
             INSERT INTO verifications
-                (code, uid, type, expireDate, vaild)
+                (code, uid, type, expireDate, valid)
             VALUES
-                (:code, :uid, :type, :expireDate, :vaild)
+                (:code, :uid, :type, :expireDate, :valid)
         ');
 		
         $stmt->bindParam(':code', $code);
         $stmt->bindParam(':uid', $verification->uid);
         $stmt->bindParam(':type', $verification->type);
         $stmt->bindParam(':expireDate', $verification->expireDate);
-        $stmt->bindParam(':vaild', $verification->vaild);
+        $stmt->bindParam(':valid', $verification->valid);
 		
         return $stmt->execute() ? $code : FALSE;
     }
@@ -68,14 +68,14 @@ class VerificationsRepository extends RepositoryBase
             SET uid = :uid,
 				type = :type,
 				expireDate = :expireDate,
-				vaild = :vaild
+				valid = :valid
             WHERE code = :code
         ');
 
         $stmt->bindParam(':uid', $verification->uid);
         $stmt->bindParam(':type', $verification->type);
         $stmt->bindParam(':expireDate', $verification->expireDate);
-        $stmt->bindParam(':vaild', $verification->vaild);
+        $stmt->bindParam(':valid', $verification->valid);
 		
         $stmt->bindParam(':code', $verification->code);
         return $stmt->execute();
@@ -119,7 +119,7 @@ class VerificationsRepository extends RepositoryBase
     {
         $stmt = $this->connection->prepare('
             UPDATE verifications
-            SET vaild = FALSE
+            SET valid = FALSE
             WHERE uid = :uid
 			AND type = :type
         ');

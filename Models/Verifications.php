@@ -9,5 +9,5 @@ class Verifications extends ModelBase
 	public $type; // 0 = Verify Account, 1 = Verify Reset Password
 	public $creationDate;
 	public $expireDate;
-	public $vaild;
+	public $valid;
 }

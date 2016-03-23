@@ -26,7 +26,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 				"registered" => "<strong>Sorry</strong>, but the Username you choose was registed.",
 				"password" => "<strong>Opps!</strong> There is something wrong with your password!",
 				"empty" => "<strong>Opps!</strong> You Forgot to fill up the Form!",
-				"username" => "<strong>Opps!</strong> There is something wrong with your Username!",
+				"username" => "<strong>Opps!</strong> There is something wrong with your Username! Please note that username must be 4 to 32 english characters and numbers.",
 				"email" => "<strong>Opps!</strong> There is something wrong with your Email!",
 				"server" => "<strong>Oh no!</strong> The server room is on fire!",
 				"recaptcha" => "<strong>Opps!</strong> Please proof that you are not a robot!"

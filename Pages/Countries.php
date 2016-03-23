@@ -269,7 +269,7 @@ class Countries
 		echo "</select>";
 	}
 	
-	public function vaildCountryCode($country){
+	public function validCountryCode($country){
 		if(isset($this->countries[$country]))
 			return true;
 		

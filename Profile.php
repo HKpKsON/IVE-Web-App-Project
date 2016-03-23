@@ -27,6 +27,11 @@ if(!isset($_SESSION['uid'])){
 	}else{
 		$user = $userRepo->find($user->id);
 		
+		if($user->valid == false){
+			header("Location: ?error=invalid");
+			die();
+		}
+		
 		// Only Change Password if user actually give a new password
 		if($_POST['inputPassword'] != ''){
 			if($_POST['inputPassword'] !== $_POST['inputConPassword']){
@@ -65,7 +70,7 @@ if(!isset($_SESSION['uid'])){
 		
 		include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
 		$country = new Countries;
-		$country->vaildCountryCode($_POST['inputCountry']) ? $user->country = $_POST['inputCountry'] : $user->country = 'HK';
+		$country->validCountryCode($_POST['inputCountry']) ? $user->country = $_POST['inputCountry'] : $user->country = 'HK';
 		
 		$updateuser = $userRepo->update($user);
 		

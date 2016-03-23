@@ -41,20 +41,16 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 				"empty" => "<strong>Opps!</strong> You Forgot to fill up the Form!",
 				"username" => "<strong>Opps!</strong> There is something wrong with your Username!",
 				"email" => "<strong>Opps!</strong> There is something wrong with your Email!",
-				"server" => "<strong>Oh no!</strong> The server room is on fire!"
+				"server" => "<strong>Oh no!</strong> The server room is on fire!",
+				"invalid" => "<strong>Sorry,</strong> you are not allowed to edit your profile since your account is either <strong>locked</strong> or <strong>not validated by email</strong>, please check your email inbox for validation."
 			);
 			
-			if(isset($errormsg[$_GET['error']])){
-		?>
+			if(isset($errormsg[$_GET['error']])){ ?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<?= $errormsg[$_GET['error']]; ?>
 		</div>
-		<?php
-			}
-			unset($errormsg);
-		}
-		?>
+		<?php } unset($errormsg); } ?>
 		<?php
 			if(isset($_GET['success']) && $_GET['success'] == 'true'){
 		?>

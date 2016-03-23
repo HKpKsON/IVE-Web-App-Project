@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 	
-$pageName = 'Forget Password';
+$pageName = 'Resend Validation Email';
 
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::siteName . ' (School Project)';
@@ -17,7 +17,7 @@ function headerExtra()
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
 <div class="container">
-	<form class="form-register" action="?action=findmypassword" method="POST">
+	<form class="form-register" action="?action=requestemail" method="POST">
 		<h2 class="form-register-heading"><?= $pageName ?></h2>
 		<hr />
 		<?php
@@ -25,30 +25,24 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 			$errormsg = array(
 				"recaptcha" => "<strong>Opps!</strong> Please proof that you are not a robot!",
 				"nosuchmember" => "<strong>Opps!</strong> There is no such user!",
+				"notinvalid" => "<strong>Opps!</strong> Your account is validated and ready to use!",
+				"expired" => "<strong>Opps!</strong> Your code is either expired or used.",
 				"empty" => "<strong>Opps!</strong> You forgot to fill up the form!",
 				"server" => "<strong>Oh no!</strong> The server room is on fire!"
 			);
 			
-			if(isset($errormsg[$_GET['error']])){
-		?>
+			if(isset($errormsg[$_GET['error']])){ ?>
 		<div class="alert alert-danger alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<?= $errormsg[$_GET['error']]; ?>
 		</div>
-		<?php
-			}
-			unset($errormsg);
-		}
-		?>
-		<?php
-			if(isset($_GET['success']) && $_GET['success'] == 'true'){
-		?>
+		<?php } unset($errormsg); } ?>
+		<?php if(isset($_GET['success']) && $_GET['success'] == 'true'){ ?>
 		<div class="alert alert-success alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>It's alright,</strong> an email was sent to your email inbox. Please check out the link inside the email in order to reset your password.
+			<strong>Done!</strong> An email was sent to your email inbox. Please check out the link inside the email in order to activated your account.
 		</div>
 		<?php } ?>
-		
 		<div class="col-md-6">
 			<label for="inputUsername"><h3>Username</h3></label>
 			<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" type="text" required="">
@@ -63,7 +57,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		</div>
 		<div class="col-md-12">
 			<hr />
-			<button class="btn btn-lg btn-danger btn-block" type="submit">Please reset my password!</button>
+			<button class="btn btn-lg btn-danger btn-block" type="submit">Send Me The Email!</button>
 		</div>
 	</form>
 </div>

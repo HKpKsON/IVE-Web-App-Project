@@ -86,7 +86,8 @@ class UsersRepository extends RepositoryBase
                 phone = :phone,
                 country = :country,
 				openid = :openid,
-				isAdmin = :isAdmin
+				isAdmin = :isAdmin,
+				valid = :valid
             WHERE id = :id
         ');
 
@@ -101,6 +102,7 @@ class UsersRepository extends RepositoryBase
         $stmt->bindParam(':country', $users->country);
         $stmt->bindParam(':openid', $users->openid);
         $stmt->bindParam(':isAdmin', $users->isAdmin);
+        $stmt->bindParam(':valid', $users->valid);
 		
         $stmt->bindParam(':id', $users->id);
         return $stmt->execute();

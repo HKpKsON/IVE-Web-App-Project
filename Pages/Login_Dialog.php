@@ -19,6 +19,7 @@ if(isset($_SESSION['uid'])){
 	</span>
 	<ul class="dropdown-menu">
 		<li><a href="/Profile.php">My Profile</a></li>
+		<?php if($login->isAdmin > 0){ ?><li><a href="/ACP/" target="_blank"><strong>ACP</strong></a></li><?php } ?>
 		<li role="separator" class="divider"></li>
 		<li><a href="/Logout.php">Logout</a></li>
 	</ul>
@@ -43,11 +44,16 @@ if(isset($_SESSION['uid'])){
 						<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
 						<label for="inputPassword" class="sr-only">Password</label>
 						<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
-						<div class="checkbox">
-						  <label>
-							<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
-						  </label>
-						  <a class="text-right" href="/FogetPassword.php">Forget Password?</a>
+						<div class="checkbox row">
+							<div class="col-md-6 text-left">
+								<a href="/FogetPassword.php">Forget Password?</a>
+							</div>
+							<div class="col-md-6 text-right">
+								<label>
+									<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
+								</label>
+							</div>
+							<br />
 						</div>
 						<button class="btn btn-lg btn-success" type="submit">Sign in</button>
 						<button class="btn btn-lg btn-danger" type="button" data-dismiss="modal">Cancel</button>

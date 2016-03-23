@@ -8,5 +8,5 @@ class PromoteCode extends ModelBase
 	public $comment;
 	public $creationDate;
 	public $expireDate;
-	public $vaild;
+	public $valid;
 }

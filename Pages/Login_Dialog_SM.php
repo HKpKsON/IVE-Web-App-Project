@@ -13,9 +13,11 @@ if(isset($_SESSION['uid'])){
 	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
 	$login = $conn->find($_SESSION['uid']);
 ?>
-<a href="/Profile.php">My Profile</a>
-<span>|</span>
-<a href="/Logout.php">Logout</a>
+	<a href="/Profile.php">My Profile</a>
+	<span>|</span>
+	<?php if($login->isAdmin > 0){ ?><a href="/ACP/" target="_blank"><strong>ACP</strong></a><?php } ?>
+	<span>|</span>
+	<a href="/Logout.php">Logout</a>
 <?php
 }else{
 	$cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';

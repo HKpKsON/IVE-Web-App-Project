@@ -33,14 +33,19 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 	}
 	
 	if($login !== false){
-		$_SESSION['uid'] = $login;
-		$_SESSION['salt'] = $userRepo->findsalt($login);
+		if($userRepo->find($login)->valid == false){
+			header('Location: ?error=invalid');
+			die();
+		}else{
+			$_SESSION['uid'] = $login;
+			$_SESSION['salt'] = $userRepo->findsalt($login);
 		
-		setcookie('login', 'true');
-		
-		$user = $userRepo->find($login);
-		header("Location: /");
-		die();
+			setcookie('login', 'true');
+			
+			$user = $userRepo->find($login);
+			header("Location: /");
+			die();
+		}
 	}else{
 		header('Location: ?error=userpw');
 		die();

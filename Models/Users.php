@@ -16,4 +16,5 @@ class Users extends ModelBase
 	public $creationDate;
 	public $openid;
 	public $isAdmin; // 0 = Normal Users, 1 = Editor, 255 = Site Admin etc
+	public $valid;
 }

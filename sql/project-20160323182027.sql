@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2016 at 12:33 PM
+-- Generation Time: Mar 23, 2016 at 06:20 PM
 -- Server version: 5.6.13
 -- PHP Version: 5.4.17
 
@@ -182,6 +182,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `openid` varchar(256) DEFAULT NULL,
   `isAdmin` int(8) NOT NULL DEFAULT '0',
+  `valid` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -190,8 +191,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `salutation`, `displayname`, `email`, `address`, `fullname`, `phone`, `country`, `creationDate`, `openid`, `isAdmin`) VALUES
-(-1, 'siteadmin', '3b5fe2d5c4a3c17ce9caaab42ca1e22787a9d5e47cd091a90ba166678e72841c*tCz8L4unVnJtIUJwkuv5ustipFDJNtsu', 'Mr.', 'Site Admin', 'kenhasbeenused@gmail.com', '', 'Site Admin', '', 'AF', '2016-03-06 18:18:01', NULL, 255);
+INSERT INTO `users` (`id`, `username`, `password`, `salutation`, `displayname`, `email`, `address`, `fullname`, `phone`, `country`, `creationDate`, `openid`, `isAdmin`, `valid`) VALUES
+(-1, 'siteadmin', '5c77740c04b3bfd78552d776bff79b46e3651a70932aa9ecffd328c94ef31a4d*Qp6KuBlkIB5cdKOsfTsGvmvZe0VW6bcF', 'Mr.', 'Site Admin', 'kenhasbeenused@gmail.com', '', 'Site Admin', '', 'AF', '2016-03-06 18:18:01', NULL, 255, 1);
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `verifications` (
   `type` int(8) NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expireDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `vaild` tinyint(1) NOT NULL DEFAULT '1',
+  `valid` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

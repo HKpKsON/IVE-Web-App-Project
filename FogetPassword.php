@@ -46,7 +46,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 					$verification->type = 1;
 
 					$verification->expireDate = date("Y-m-d H:i:s", time() + (2 * 24 * 60 * 60));
-					$verification->vaild = TRUE;
+					$verification->valid = TRUE;
 					
 					// Remove Last Record
 					$verifyRepo->removeRecord($user->id, 1);
@@ -63,7 +63,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 						$mail->isHTML(true);                                  // Set email format to HTML
 
 						$mail->Subject = $user->salutation . ' ' . $user->displayname . ', You have requested a password recovery.';
-						$mail->Body =	'<p>This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired. Please goto this location <a href="http://localhost:8080/FogetPassword.php?action=resetpassword">Reset Password</a> to reset your password.</p>';
+						$mail->Body = '<p>This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired. Please goto this location <a href="http://localhost:8080/FogetPassword.php?action=resetpassword">Reset Password</a> to reset your password.</p>';
 						$mail->AltBody = 'This is your code: ['.$result.'], this code will be expired in 48 hours. Any code you have requested before will be expired. http://localhost:8080/FogetPassword.php?action=resetpassword';
 
 						if(!$mail->send()) {
@@ -111,7 +111,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 				}elseif($_POST['inputPassword'] !== $_POST['inputConPassword']){
 					header("Location: ?action=resetpassword&error=password");
 					die();
-				}elseif($verify->vaild != 1 || strtotime($verify->expireDate) < time()){
+				}elseif(strtotime($verify->expireDate) < time()){
 					header("Location: ?action=resetpassword&error=expired");
 					die();
 				}else{
@@ -123,7 +123,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 					
 					$userRepo->update($user);
 					
-					$verify->vaild = 0;
+					$verify->valid = 0;
 					$verifyRepo->update($verify);
 					
 					header("Location: ?action=resetpassword&success=true");
