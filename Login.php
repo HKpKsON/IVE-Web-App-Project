@@ -25,8 +25,8 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		$user->password = $_POST['inputPassword'];
 	}
 
-	$conn = new UsersRepository($PDO);
-	$login = $conn->login($user);
+	$userRepo = new UsersRepository($PDO);
+	$login = $userRepo->login($user);
 
 	if(isset($_POST['inputRemember'])){
 		setcookie('username', $_POST['inputUsername']);
@@ -34,7 +34,11 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 	
 	if($login !== false){
 		$_SESSION['uid'] = $login;
-		$user = $conn->find($login);
+		$_SESSION['salt'] = $userRepo->findsalt($login);
+		
+		setcookie('login', 'true');
+		
+		$user = $userRepo->find($login);
 		header("Location: /");
 		die();
 	}else{

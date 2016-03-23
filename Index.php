@@ -7,8 +7,8 @@ use \Repositories\UsersRepository;
 use \PDO;
 
 if(isset($_SESSION['uid'])){
-	$conn = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
-	$login = $conn->find($_SESSION['uid']);
+	$userRepo = new UsersRepository(new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd));
+	$login = $userRepo->find($_SESSION['uid']);
 	$pageName = "Welcome back, " . $login->displayname . "!";
 }
 

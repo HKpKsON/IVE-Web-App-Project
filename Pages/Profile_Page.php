@@ -15,7 +15,7 @@ $conn = new UsersRepository;
 $user = $conn->find($_SESSION['uid']);
 
 $pageName = 'My Profile';
-	
+
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
 

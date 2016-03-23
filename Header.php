@@ -18,6 +18,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<?= function_exists('headerExtra') ? headerExtra() : "" ?>
+	
+	<?php if(isset($_COOKIE['login'])){ ?>
+	<!-- Really simple META logout -->
+	<!-- Source: https://www.sitepoint.com/community/t/automatic-logout-after-inactive-for-15-minutes/3538/4 -->
+	<meta http-equiv="refresh" content="1800;url=/Logout.php?reason=idle" />
+	<?php } ?>
 </head>
 <body>
 <div class="container">

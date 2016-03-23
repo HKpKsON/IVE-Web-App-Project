@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="/">
 			<i class="glyphicon glyphicon-home"></i>

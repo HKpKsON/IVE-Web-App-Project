@@ -11,7 +11,7 @@
 			</div>
 			<div class="copyright text-center">
 				<p>
-				Copyright © 2016 | [Company Name Here] All rights reserved.
+				Copyright &copy; 2016 | [Company Name Here] All rights reserved.
 				</p>
 			</div>
 		</div>

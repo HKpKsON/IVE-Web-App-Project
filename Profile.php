@@ -15,21 +15,25 @@ $PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cf
 if(!isset($_SESSION['uid'])){
 	header('Location: /Login.php?error=nologin');
 }elseif(isset($_GET['action']) && $_GET['action'] == 'update' && isset($_POST['inputLogin'])){
-	$conn = new UsersRepository($PDO);
+	$userRepo = new UsersRepository($PDO);
 	$user = new Users;
 	
 	$user->id = $_SESSION['uid'];
 	$user->password = $_POST['inputLogin'];
 	
-	if($conn->login($user) !== false){
-		$user = $conn->find($user->id);
+	if($userRepo->login($user) == false){
+		header("Location: ?error=wrongpw");
+		die();
+	}else{
+		$user = $userRepo->find($user->id);
 		
+		// Only Change Password if user actually give a new password
 		if($_POST['inputPassword'] != ''){
 			if($_POST['inputPassword'] !== $_POST['inputConPassword']){
 				header("Location: ?error=password");
 				die();
 			}else{
-				$user->password = $conn->hashnsalt($_POST['inputPassword'], $conn->saltgen());
+				$user->password = $userRepo->hashnsalt($_POST['inputPassword'], $userRepo->saltgen());
 			}
 		}
 		
@@ -63,7 +67,7 @@ if(!isset($_SESSION['uid'])){
 		$country = new Countries;
 		$country->vaildCountryCode($_POST['inputCountry']) ? $user->country = $_POST['inputCountry'] : $user->country = 'HK';
 		
-		$updateuser = $conn->update($user);
+		$updateuser = $userRepo->update($user);
 		
 		if($updateuser){
 			header("Location: ?success=true");
@@ -72,10 +76,18 @@ if(!isset($_SESSION['uid'])){
 			header("Location: ?error=server");
 			die();
 		}
-	}else{
-		header("Location: ?error=wrongpw");
-		die();
 	}
+	
 }else{
+	// If user's cookies does not match server record, reject their connection.
+	$userRepo = new UsersRepository($PDO);
+	
+	$salt = isset($_SESSION['salt']) ? $_SESSION['salt'] : '';
+	$uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : '';
+
+	if($salt !== $userRepo->findsalt($uid)){
+		header('Location: /Logout.php?reason=timeout');
+	}
+
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Profile_Page.php');
 }

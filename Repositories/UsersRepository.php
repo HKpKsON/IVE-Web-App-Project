@@ -174,7 +174,7 @@ class UsersRepository extends RepositoryBase
 			return false;	[If user not found]
 	************************************************
 		By KEN */
-	private function findsalt($id)
+	public function findsalt($id)
 	{
 		$user = $this->find($id);
 		if($user != false){

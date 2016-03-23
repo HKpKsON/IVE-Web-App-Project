@@ -40,7 +40,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 			die();
 		}else{
 			$user = new Users;
-			$conn = new UsersRepository($PDO);
+			$userRepo = new UsersRepository($PDO);
 			
 			$user->username = $_POST['inputUsername'];
 			$user->email = $_POST['inputEmail'];
@@ -68,7 +68,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 			$country = new Countries;
 			$country->vaildCountryCode($_POST['inputCountry']) ? $user->country = $_POST['inputCountry'] : $user->country = '';
 
-			$adduser = $conn->adduser($user);
+			$adduser = $userRepo->adduser($user);
 			
 			if($adduser == 1){
 				header("Location: ?error=registered");

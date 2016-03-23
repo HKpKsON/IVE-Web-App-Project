@@ -56,7 +56,7 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 					
 					if($result !== FALSE){
 						// Send Email
-						require_once($_SERVER['DOCUMENT_ROOT'] .'/Mail.php');
+						require_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/Mail.php');
 						
 						$mail->addAddress($user->email, $user->displayname);     // Add a recipient
 
