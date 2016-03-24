@@ -58,7 +58,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		</div>
 		<div class="col-md-6">
 			<label for="inputCode"><h3>Code</h3></label>
-			<input id="inputCode" name="inputCode" class="form-control" placeholder="Code" type="text" required="">
+			<input id="inputCode" name="inputCode" class="form-control" placeholder="Code" type="text" required="" value="<?= isset($_GET['code']) ? $_GET['code'] : '' ?>">
 			<p>
 				<label for="inputRecaptcha"><h3>Proof that your are human:</h3></label>
 				<div class="g-recaptcha" data-sitekey="6Le6ShsTAAAAABNekfeYmWEfP9RBLytL58XrYPMu"></div>

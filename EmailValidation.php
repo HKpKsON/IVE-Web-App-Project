@@ -67,8 +67,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'requestemail'){
 							$mail->isHTML(true);                                  // Set email format to HTML
 
 							$mail->Subject = $user->salutation . ' ' . $user->displayname . ', You have requested an account activation.';
-							$mail->Body =	'<p>This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired. Please goto this location <a href="http://localhost:8080/EmailValidation.php?action=activation">Email Validation</a> to Activate your Account.</p>';
-							$mail->AltBody = 'This is your code: ['.$result.'], this code will be expired in 48 hours. Any code you have requested before will be expired. http://localhost:8080/EmailValidation.php?action=activation';
+							$mail->Body =	'<p>This is your code: <strong>'.$result.'</strong>, this code will be expired in 48 hours. Any code you have requested before will be expired. Please goto this location <a href="http://localhost:8080/EmailValidation.php?action=activation&code='.$result.'">Email Validation</a> to Activate your Account.</p>';
+							$mail->AltBody = 'This is your code: ['.$result.'], this code will be expired in 48 hours. Any code you have requested before will be expired. http://localhost:8080/EmailValidation.php?action=activation&code='.$result;
 
 							if(!$mail->send()) {
 								header("Location: ?error=server");
