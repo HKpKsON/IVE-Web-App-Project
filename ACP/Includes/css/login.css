@@ -4,7 +4,9 @@ body {
 }
 
 .login-box {
-	margin-top: 25%;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
 	background-color: #333;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
