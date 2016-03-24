@@ -70,7 +70,7 @@ if(!isset($_SESSION['uid'])){
 		
 		include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
 		$country = new Countries;
-		$country->validCountryCode($_POST['inputCountry']) ? $user->country = $_POST['inputCountry'] : $user->country = 'HK';
+		$user->country = $country->validCountryCode($_POST['inputCountry']) ? $_POST['inputCountry'] : 'HK';
 		
 		$updateuser = $userRepo->update($user);
 		

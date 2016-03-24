@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,700);
+
+/* http://startbootstrap.com/template-overviews/simple-sidebar/ */
+@import url(simple-sidebar.css);
+
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: #000;
+	color: #fff;
+}
+
+body a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+body a:hover {
+	color: #aaa;
+	text-decoration: underline;
+}
+
+#sidebar-wrapper {
+	background-color: #fff;
+}
+
+.sidebar-nav li,
+.sidebar-nav li a {
+    color: #000;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #aaa;
+    background: rgba(255,255,255,0.2);
+}
+
+a.black,
+a.black:hover {
+	color: #000;
+	text-decoration: none;
+}

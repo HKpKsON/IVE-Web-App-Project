@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+date_default_timezone_set('Asia/Hong_Kong');
+
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
@@ -9,10 +12,17 @@ use \Models\Users;
 use \Repositories\UsersRepository;
 
 use \PDO;
+
 $PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd);
 
-if(!isset($_GET['error']) && isset($_SESSION['uid'])){
-	header('Location: ?error=logged');
+$uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : FALSE;
+$salt = isset($_SESSION['salt']) ? $_SESSION['salt'] : FALSE;
+$sessionTime = isset($_SESSION['sessionTime']) ? $_SESSION['sessionTime'] : FALSE;
+
+$userRepo = new UsersRepository($PDO);
+
+if(!isset($_GET['error']) && $uid !== FALSE &&  $sessionTime > time() && $salt == $userRepo->findsalt($uid)){
+	header('Location: /ACP/Index.php');
 }else if(isset($_GET['action']) && $_GET['action'] == 'login'){
 	$user = new Users;
 
@@ -25,25 +35,24 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		$user->password = $_POST['inputPassword'];
 	}
 
-	$userRepo = new UsersRepository($PDO);
 	$login = $userRepo->login($user);
-
-	if(isset($_POST['inputRemember'])){
-		setcookie('username', $_POST['inputUsername']);
-	}
 	
 	if($login !== false){
 		if($userRepo->find($login)->valid == false || $userRepo->find($login)->isAdmin == -1){
 			header('Location: ?error=invalid');
 			die();
+		}elseif($userRepo->find($login)->isAdmin <= 0){
+			header('Location: ?error=notadmin');
+			die();
 		}else{
 			$_SESSION['uid'] = $login;
 			$_SESSION['salt'] = $userRepo->findsalt($login);
+			$_SESSION['sessionTime'] = time() + 15 * 60;
 		
 			setcookie('login', 'true');
 			
 			$user = $userRepo->find($login);
-			header("Location: /");
+			header("Location: /ACP/");
 			die();
 		}
 	}else{
@@ -51,6 +60,6 @@ if(!isset($_GET['error']) && isset($_SESSION['uid'])){
 		die();
 	}
 }else{
-	include_once($_SERVER['DOCUMENT_ROOT'] ."/Pages/Login_Page.php");
+	include_once($_SERVER['DOCUMENT_ROOT'] ."/ACP/Pages/Login_Page.php");
 }
 ?>

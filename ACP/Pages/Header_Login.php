@@ -1,4 +1,3 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/SecurityCheck.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,4 @@
 	<?= function_exists('headerExtra') ? headerExtra() : "" ?>
 </head>
 <body>
-<div id="wrapper">
-<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Pages/Sidebar.php'); ?>
-<div id="page-content-wrapper">
-	<div class="container-fluid">
+<div class="container-fluid">

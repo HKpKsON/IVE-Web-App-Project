@@ -32,13 +32,13 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 			);
 			
 			if(isset($errormsg[$_GET['error']])){ ?>
-		<div class="alert alert-danger alert-dismissible" role="alert">
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<?= $errormsg[$_GET['error']]; ?>
 		</div>
 		<?php } unset($errormsg); } ?>
 		<?php if(isset($_GET['success']) && $_GET['success'] == 'true'){ ?>
-		<div class="alert alert-success alert-dismissible">
+		<div class="alert alert-success alert-dismissible fade in">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<strong>Done!</strong> An email was sent to your email inbox. Please check out the link inside the email in order to activated your account.
 		</div>

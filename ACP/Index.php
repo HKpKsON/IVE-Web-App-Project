@@ -10,13 +10,13 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::si
 function headerExtra()
 {
     ?>
-
     <?php
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 ?>
-
+<!-- This is the actual body -->
+<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Dashboard/Index.php'); ?>
 <?php
 //If you need add javascript before the end of body!
 function bodyEndExtra()

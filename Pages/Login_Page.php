@@ -26,7 +26,7 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 		);
 		
 			if(isset($successmsg[$_GET['success']])){ ?>
-	<div class="alert alert-success alert-dismissible" role="alert">
+	<div class="alert alert-success alert-dismissible fade in" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<?= $successmsg[$_GET['success']]; ?>
 	</div>
@@ -61,7 +61,7 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 					);
 					
 					if(isset($errormsg[$_GET['error']])){ ?>
-				<br /><div class="alert alert-danger alert-dismissible" role="alert">
+				<br /><div class="alert alert-danger alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<?= $errormsg[$_GET['error']]; ?>
 				</div>

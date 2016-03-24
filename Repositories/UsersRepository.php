@@ -28,11 +28,13 @@ class UsersRepository extends RepositoryBase
         return $stmt->fetch();
     }
 
-    public function findAll()
+    public function findAll($keyword = '%')
     {
         $stmt = $this->connection->prepare('
             SELECT * FROM users
+			WHERE username LIKE :keyword
         ');
+		$stmt->bindParam(':keyword', $keyword);
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS, '\Models\Users');
 
@@ -249,15 +251,12 @@ class UsersRepository extends RepositoryBase
 			return -1;	[If sucess]
 			return 0;	[If DB error]
 			return 1;	[If username taken]
-			return 2;	[If password is null]
 	************************************************
 	*/
 	public function adduser($users)
 	{
 		if($this->findid($users->username) != false){
 			return 1;
-		}elseif($users->password == null){
-			return 2;
 		}
 		
 		// Salting on password
