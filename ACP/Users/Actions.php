@@ -48,11 +48,17 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 		$user->country = $country->validCountryCode($_POST['inputCountry']) ? $_POST['inputCountry'] : 'HK';
 
 		$user->isAdmin = ($_POST['inputAdmin'] < -1 || $_POST['inputAdmin'] > 255) ? -1 : $_POST['inputAdmin'];
-		$user->valid = $_POST['inputValid'] == 'TRUE' ? TRUE : FALSE;
+		$user->valid = (isset($_POST['inputValid']) && ($_POST['inputValid'] == 'TRUE' || $_POST['inputValid'] == 'FALSE')) ? $_POST['inputValid'] : $user->valid;
 		
-		$userRepo->update($user);
-		header('Location: /ACP/Users/');
-		die();
+		$status = $userRepo->update($user);
+
+		if($status !== FALSE){
+			header('Location: /ACP/Users/?success=true');
+			die();
+		}else{
+			header('Location: /ACP/Users/?success=false');
+			die();
+		}
 	}
 
 }elseif(isset($_GET['action']) && isset($_POST['inputUsername']) && $_GET['action'] == 'add'){

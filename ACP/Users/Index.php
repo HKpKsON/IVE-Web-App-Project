@@ -16,6 +16,19 @@ function headerExtra()
 include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 ?>
 <!-- This is the actual body -->
+<?php
+if(isset($_GET['success'])){
+	$msg = array(
+	'true' => '<strong>User Profile Edited.</strong>',
+	'false' => '<strong>User Profile Edition Failed.</strong>'
+	);
+
+	if(isset($msg[$_GET['success']])){ ?>
+	<div class="alert alert-warning alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<?= $msg[$_GET['success']]; ?>
+</div>
+<?php } unset($msg); } ?>
 <h1><?= $pageName ?></h1>
 <hr />
 <?php
@@ -42,7 +55,7 @@ Data will be shown with 50 record per page.
 </p>
 <p>
 To Search Users, '%' means anything, '%user%' means any user with any prefix and suffix of 'user' are included.<br />
-Admin Levels are: -1 for Locked Accounts, 0 for Normal Users, 1 for Editors, 255 for Site Admin
+User Groups are: -1 for Locked Accounts, 0 for Normal Users, 1 for Editors, 255 for Site Admin
 </p>
 <p>
 Note: Admin's Password and Validation Status Are Not Allowed To Be Changed.
@@ -68,7 +81,7 @@ Note: Admin's Password and Validation Status Are Not Allowed To Be Changed.
 	<th>Phone No.</th>
 	<th>Country</th>
 	<th>If Valid</th>
-	<th>Admin Level</th>
+	<th>User Groups</th>
 </tr>
 <!-- User Edit -->
 <?php
@@ -126,7 +139,7 @@ foreach($result as $user){
 			<option value="FALSE" <?= $user->valid == '0' ? 'selected' : '' ?>>FALSE</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="Admin Level" value="<?= $user->isAdmin ?>"></td>
+	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="User Groups" value="<?= $user->isAdmin ?>"></td>
 </form></tr>
 <?php
 		}
@@ -176,7 +189,7 @@ foreach($result as $user){
 			<option value="FALSE">FALSE</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="Admin Level"></td>
+	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="User Groups"></td>
 </form></tr>
 </table>
 <nav>
