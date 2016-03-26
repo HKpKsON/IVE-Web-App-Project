@@ -6,13 +6,13 @@
 		</li>
 		<hr />
 		<li>
-		<a href="/ACP/">Dashboard</a>
+		<a href="/ACP/" title="Dashboard">Dashboard</a>
 		</li>
 		<li>
-		<a href="/ACP/Users/">Users Management</a>
+		<a href="/ACP/Users/" title="Users Management">Users Management</a>
 		</li>
 		<li>
-		<a href="/ACP/Logout.php">Logout</a>
+		<a href="/ACP/Logout.php" title="Logout ACP Only">Logout ACP</a>
 		</li>
 	</ul>
 </div>

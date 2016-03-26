@@ -24,10 +24,17 @@ $sessionTime = isset($_SESSION['sessionTime']) ? $_SESSION['sessionTime'] : FALS
 
 $userRepo = new UsersRepository($PDO);
 
-if($uid === FALSE || $sessionTime === FALSE || $sessionTime < time() || $salt !== $userRepo->findsalt($uid)){
-	removeAll();
-	header('Location: /ACP/Login.php');
+$logged = $uid === FALSE || $sessionTime === FALSE || $salt === FALSE || $salt !== $userRepo->findsalt($uid) ? FALSE : TRUE;
+$validsession = $sessionTime < time() ? TRUE : FALSE;
+
+removeAll();
+
+if(!$logged){
+	if(!$validsession){
+		header('Location: /ACP/Login.php?error=timeout');
+	}else{
+		header('Location: /ACP/Login.php');
+	}
 }else{
 	$_SESSION['sessionTime'] = time() + 15 * 60;
-	removeAll();
 }

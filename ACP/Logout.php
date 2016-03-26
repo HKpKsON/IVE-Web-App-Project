@@ -3,7 +3,7 @@ session_start();
 
 unset($_SESSION['sessionTime']);
 
-header('Location: /ACP/');
+header('Location: /ACP/Login.php');
 die();
 
 ?>

@@ -13,12 +13,13 @@ $PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cf
 $userRepo = new UsersRepository($PDO);
 
 if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'){
+	// Action for Update
 	
 	$user = new Users;
 	$user = $userRepo->find($_GET['user']);
 
 	if($user === FALSE){
-		header('Location: /ACP/Users/');
+		header('Location: /ACP/Users/?success=false');
 		die();
 	}else{
 		$user->password = ($user->isAdmin == 255 || $_POST['inputPassword'] == '') ? $user->password : $userRepo->hashnsalt($_POST['inputPassword'], $userRepo->saltgen());
@@ -62,6 +63,7 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 	}
 
 }elseif(isset($_GET['action']) && isset($_POST['inputUsername']) && $_GET['action'] == 'add'){
+	// Action for Adding
 	
 	$user = new Users;
 	$user->username = $_POST['inputUsername'];
@@ -99,6 +101,8 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 	die();
 	
 }else{
+	// Action for Anything Else
+	
 	header('Location: /ACP/Users/');
 	die();
 }

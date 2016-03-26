@@ -46,8 +46,9 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 					"userpw" => "<strong>Opps!</strong> Wrong Username or Password.",
 					"logged" => "<strong>Opps!</strong> You have already logged in.",
 					"notadmin" => "<strong>Opps!</strong> You are not an Admin!",
-					"invalid" => "<strong>Sorry,</strong> you are not allowed to sign in since your account is either <strong>locked</strong> or <strong>not validated by email</strong>, please check your email inbox for validation. (Can't find your email? <a href=\"/EmailValidation.php?action=requestemail\" target=\"_blank\">Resend it?</a>)"
-				);
+					"invalid" => "<strong>Sorry,</strong> you are not allowed to sign in since your account is either <strong>locked</strong> or <strong>not validated by email</strong>, please check your email inbox for validation. (Can't find your email? <a href=\"/EmailValidation.php?action=requestemail\" target=\"_blank\">Resend it?</a>)",
+					"timeout" => "<strong>Sorry, </strong> your session has time-out. Please login again."
+					);
 						
 				if(isset($errormsg[$_GET['error']])){ ?>
 				<br /><div class="alert alert-danger alert-dismissible fade in" role="alert">
