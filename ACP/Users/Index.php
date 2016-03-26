@@ -32,6 +32,7 @@ if(isset($_GET['success'])){
 <h1><?= $pageName ?></h1>
 <hr />
 <?php
+// User Permission Check
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
@@ -95,7 +96,7 @@ $maxPage = $mod == 0 ? $total / $itemPerPage : ($total - $mod) / $itemPerPage + 
 $maxPage = $total > 0 ? $maxPage : 1;
 $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] <= $maxPage && $_GET['page'] > 0) ? $page = $_GET['page'] : $page = 1;
 
-if($result == FALSE){
+if($total <= 0){
 	echo "<td colspan=\"0\" class=\"text-center\">Cannot Find Record</td>";
 }else{
 	
@@ -134,12 +135,19 @@ foreach($result as $user){
 		?>
 	</td>
 	<td>
-		<select class="form-control" name="inputValid"<?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : ''?>>
-			<option value="TRUE" <?= $user->valid == '1' ? 'selected' : '' ?>>TRUE</option>
-			<option value="FALSE" <?= $user->valid == '0' ? 'selected' : '' ?>>FALSE</option>
+		<select class="form-control" name="inputValid"<?= $user->isAdmin == 255 ? ' disabled' : ''?>>
+			<option value="TRUE" <?= $user->valid == '1' ? 'selected' : '' ?>>Valid</option>
+			<option value="FALSE" <?= $user->valid == '0' ? 'selected' : '' ?>>Invalid</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="User Groups" value="<?= $user->isAdmin ?>"></td>
+	<td>
+		<select class="form-control" name="inputAdmin">
+			<option value="-1" <?= $user->isAdmin == '-1' ? 'selected' : '' ?> <?= $user->isAdmin == 255 ? ' disabled' : ''?>>Locked</option>
+			<option value="0" <?= $user->isAdmin == '0' ? 'selected' : '' ?>>User</option>
+			<option value="1" <?= $user->isAdmin == '1' ? 'selected' : '' ?>>Editor</option>
+			<option value="255" <?= $user->isAdmin == '255' ? 'selected' : '' ?>>Site Admin</option>
+		</select>
+	</td>
 </form></tr>
 <?php
 		}
@@ -185,11 +193,18 @@ foreach($result as $user){
 	</td>
 	<td>
 		<select class="form-control" name="inputValid">
-			<option value="TRUE">TRUE</option>
-			<option value="FALSE">FALSE</option>
+			<option value="TRUE">Valid</option>
+			<option value="FALSE">Invalid</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputAdmin" name="inputAdmin" placeholder="User Groups"></td>
+	<td>
+		<select class="form-control" name="inputAdmin">
+			<option value="-1">Locked</option>
+			<option value="0">User</option>
+			<option value="1">Editor</option>
+			<option value="255">Site Admin</option>
+		</select>
+	</td>
 </form></tr>
 </table>
 <nav>

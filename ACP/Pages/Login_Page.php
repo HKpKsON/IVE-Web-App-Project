@@ -24,7 +24,7 @@ $cookieName = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 			<h2>Admin Message:</h2>
 			<hr />
 			<h4>
-			This page is only authorized for Site Admins and Editors, Please login to continue.
+			This page is only authorized to Site Admins and Editors, Please login to continue.
 			</h4>
 		</div>
 		<div class="col-md-7">

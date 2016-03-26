@@ -47,7 +47,7 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 		$country = new Countries;
 		$user->country = $country->validCountryCode($_POST['inputCountry']) ? $_POST['inputCountry'] : 'HK';
 
-		$user->isAdmin = ($_POST['inputAdmin'] < -1 || $_POST['inputAdmin'] > 255) ? -1 : $_POST['inputAdmin'];
+		$user->isAdmin = (isset($_POST['inputAdmin']) && ($_POST['inputAdmin'] == -1 || $_POST['inputAdmin'] == 0 || $_POST['inputAdmin'] == 1 || $_POST['inputAdmin'] == 255)) ? $_POST['inputAdmin'] : $user->isAdmin;
 		$user->valid = (isset($_POST['inputValid']) && ($_POST['inputValid'] == 'TRUE' || $_POST['inputValid'] == 'FALSE')) ? $_POST['inputValid'] : $user->valid;
 		
 		$status = $userRepo->update($user);
@@ -91,7 +91,7 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 	$country = new Countries;
 	$user->country = $country->validCountryCode($_POST['inputCountry']) ? $_POST['inputCountry'] : 'HK';
 
-	$user->isAdmin = ($_POST['inputAdmin'] < -1 || $_POST['inputAdmin'] > 255) ? -1 : $_POST['inputAdmin'];
+	$user->isAdmin = (isset($_POST['inputAdmin']) && ($_POST['inputAdmin'] == -1 || $_POST['inputAdmin'] == 0 || $_POST['inputAdmin'] == 1 || $_POST['inputAdmin'] == 255)) ? $_POST['inputAdmin'] : -1;
 	$user->valid = $_POST['inputValid'] == 'TRUE' ? TRUE : FALSE;
 		
 	$userRepo->adduser($user);
