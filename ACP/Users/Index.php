@@ -113,7 +113,7 @@ foreach($result as $user){
 	</td>
 	<td><?= $user->id ?></td>
 	<td><?= $user->username ?></td>
-	<td><input type="text" class="form-control" id="inputPassword" name="inputPassword" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
+	<td><input type="text" class="form-control" class="inputPassword" name="inputPassword" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
 	<td>
 		<select class="form-control" name="inputSalutation">
 			<option value="MR" <?= $user->salutation == 'Mr.' ? 'selected' : '' ?>>Mr.</option>
@@ -121,11 +121,11 @@ foreach($result as $user){
 			<option value="MS" <?= $user->salutation == 'Ms.' ? 'selected' : '' ?>>Ms.</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputDisplayName" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
-	<td><input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
-	<td><input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
-	<td><input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
-	<td><input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
+	<td><input type="text" class="form-control" class="inputDisplayName" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
+	<td><input type="text" class="form-control" class="inputEmail" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
+	<td><input type="text" class="form-control" class="inputAddress" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
+	<td><input type="text" class="form-control" class="inputFullName" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
+	<td><input type="text" class="form-control" class="inputPhone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
 	<td>
 		<?php
 			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
@@ -169,8 +169,8 @@ foreach($result as $user){
 		</button>
 	</td>
 	<td>New</td>
-	<td><input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="New Username" required></td>
-	<td><input type="text" class="form-control" id="inputPassword" name="inputPassword" placeholder="New Password"></td>
+	<td><input type="text" class="form-control" class="inputUsername" name="inputUsername" placeholder="New Username" required></td>
+	<td><input type="text" class="form-control" class="inputPassword" name="inputPassword" placeholder="New Password"></td>
 	<td>
 		<select class="form-control" name="inputSalutation">
 			<option value="MR">Mr.</option>
@@ -178,11 +178,11 @@ foreach($result as $user){
 			<option value="MS">Ms.</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" id="inputDisplayName" name="inputDisplayName" placeholder="New Display Name"></td>
-	<td><input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="New Email"></td>
-	<td><input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="New Address"></td>
-	<td><input type="text" class="form-control" id="inputFullName" name="inputFullName" placeholder="Full Name"></td>
-	<td><input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="Phone No."></td>
+	<td><input type="text" class="form-control" class="inputDisplayName" name="inputDisplayName" placeholder="New Display Name"></td>
+	<td><input type="text" class="form-control" class="inputEmail" name="inputEmail" placeholder="New Email"></td>
+	<td><input type="text" class="form-control" class="inputAddress" name="inputAddress" placeholder="New Address"></td>
+	<td><input type="text" class="form-control" class="inputFullName" name="inputFullName" placeholder="Full Name"></td>
+	<td><input type="text" class="form-control" class="inputPhone" name="inputPhone" placeholder="Phone No."></td>
 	<td>
 		<?php
 			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
