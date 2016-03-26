@@ -55,11 +55,10 @@ Here you can view and edit all the users profile and information.<br />
 Data will be shown with 50 record per page.
 </p>
 <p>
-To Search Users, '%' means anything, '%user%' means any user with any prefix and suffix of 'user' are included.<br />
-User Groups are: -1 for Locked Accounts, 0 for Normal Users, 1 for Editors, 255 for Site Admin
+To Search Users, '%' means anything, '%user%' means any user with any prefix and suffix of 'user' are included.
 </p>
 <p>
-Note: Admin's Password and Validation Status Are Not Allowed To Be Changed.
+Note: Password Edit, Locking and Validation Status are disabled to Admins for security reasons.
 </p>
 <form class="form-inline text-right" action="" method="GET">
 <label><h4>Search: </h4></label>
@@ -67,7 +66,7 @@ Note: Admin's Password and Validation Status Are Not Allowed To Be Changed.
 <button type="sumbit" class="btn btn-default" title="Search">
 	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 </button>
-</form><br />
+</form>
 <table class="table table-condensed h5">
 <tr>
 	<th>ACTION</th>
