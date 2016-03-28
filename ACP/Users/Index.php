@@ -13,6 +13,17 @@ function headerExtra()
     <?php
 }
 
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
+
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
+
+use \Models\Users;
+use \Repositories\UsersRepository;
+
+use \PDO;
+$PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd);
+
 include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 ?>
 <!-- This is the actual body -->
@@ -33,17 +44,6 @@ if(isset($_GET['success'])){
 <hr />
 <?php
 // User Permission Check
-include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
-include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
-
-include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
-
-use \Models\Users;
-use \Repositories\UsersRepository;
-
-use \PDO;
-$PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cfg::dbUser,cfg::dbPasswd);
-
 $userRepo = new UsersRepository($PDO);
 
 if($userRepo->find($_SESSION['uid'])->isAdmin != 255){
@@ -113,7 +113,7 @@ foreach($result as $user){
 	</td>
 	<td><?= $user->id ?></td>
 	<td><?= $user->username ?></td>
-	<td><input type="text" class="form-control" class="inputPassword" name="inputPassword" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
+	<td><input type="text" class="form-control inputPassword" name="inputPassword" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
 	<td>
 		<select class="form-control" name="inputSalutation">
 			<option value="MR" <?= $user->salutation == 'Mr.' ? 'selected' : '' ?>>Mr.</option>
@@ -121,11 +121,11 @@ foreach($result as $user){
 			<option value="MS" <?= $user->salutation == 'Ms.' ? 'selected' : '' ?>>Ms.</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" class="inputDisplayName" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
-	<td><input type="text" class="form-control" class="inputEmail" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
-	<td><input type="text" class="form-control" class="inputAddress" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
-	<td><input type="text" class="form-control" class="inputFullName" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
-	<td><input type="text" class="form-control" class="inputPhone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
+	<td><input type="text" class="form-control inputDisplayName" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
+	<td><input type="text" class="form-control inputEmail" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
+	<td><input type="text" class="form-control inputAddress" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
+	<td><input type="text" class="form-control inputFullName" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
+	<td><input type="text" class="form-control inputPhone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
 	<td>
 		<?php
 			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
@@ -169,8 +169,8 @@ foreach($result as $user){
 		</button>
 	</td>
 	<td>New</td>
-	<td><input type="text" class="form-control" class="inputUsername" name="inputUsername" placeholder="New Username" required></td>
-	<td><input type="text" class="form-control" class="inputPassword" name="inputPassword" placeholder="New Password"></td>
+	<td><input type="text" class="form-control inputUsername" name="inputUsername" placeholder="New Username" required></td>
+	<td><input type="text" class="form-control inputPassword" name="inputPassword" placeholder="New Password"></td>
 	<td>
 		<select class="form-control" name="inputSalutation">
 			<option value="MR">Mr.</option>
@@ -178,11 +178,11 @@ foreach($result as $user){
 			<option value="MS">Ms.</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control" class="inputDisplayName" name="inputDisplayName" placeholder="New Display Name"></td>
-	<td><input type="text" class="form-control" class="inputEmail" name="inputEmail" placeholder="New Email"></td>
-	<td><input type="text" class="form-control" class="inputAddress" name="inputAddress" placeholder="New Address"></td>
-	<td><input type="text" class="form-control" class="inputFullName" name="inputFullName" placeholder="Full Name"></td>
-	<td><input type="text" class="form-control" class="inputPhone" name="inputPhone" placeholder="Phone No."></td>
+	<td><input type="text" class="form-control inputDisplayName" name="inputDisplayName" placeholder="New Display Name"></td>
+	<td><input type="text" class="form-control inputEmail" name="inputEmail" placeholder="New Email"></td>
+	<td><input type="text" class="form-control inputAddress" name="inputAddress" placeholder="New Address"></td>
+	<td><input type="text" class="form-control inputFullName" name="inputFullName" placeholder="Full Name"></td>
+	<td><input type="text" class="form-control inputPhone" name="inputPhone" placeholder="Phone No."></td>
 	<td>
 		<?php
 			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
