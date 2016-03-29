@@ -1,4 +1,7 @@
 <?php
+// Security Check
+include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/SecurityCheck.php');
+
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
