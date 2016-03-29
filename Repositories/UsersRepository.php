@@ -52,9 +52,9 @@ class UsersRepository extends RepositoryBase
         }
         $stmt = $this->connection->prepare('
             INSERT INTO users
-                (username, password, salutation, displayname, email, address, fullname, phone, country)
+                (username, password, salutation, displayname, email, address, fullname, phone, country, valid,isAdmin)
             VALUES
-                (:username, :password, :salutation, :displayname, :email, :address, :fullname, :phone, :country)
+                (:username, :password, :salutation, :displayname, :email, :address, :fullname, :phone, :country, :valid, :isAdmin)
         ');
         $stmt->bindParam(':username', $users->username);
         $stmt->bindParam(':password', $users->password);
@@ -65,6 +65,8 @@ class UsersRepository extends RepositoryBase
         $stmt->bindParam(':fullname', $users->fullname);
         $stmt->bindParam(':phone', $users->phone);
         $stmt->bindParam(':country', $users->country);
+        $stmt->bindParam(':valid', $users->valid);
+        $stmt->bindParam(':isAdmin', $users->isAdmin);
         return $stmt->execute();
     }
 

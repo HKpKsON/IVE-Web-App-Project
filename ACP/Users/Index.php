@@ -52,7 +52,7 @@ if($userRepo->find($_SESSION['uid'])->isAdmin != 255){
 ?>
 <p>
 Here you can view and edit all the users profile and information.<br />
-Data will be shown with 50 record per page.
+Data will be shown with 10 records per page.
 </p>
 <p>
 To Search Users, '%' means anything, '%user%' means any user with any prefix and suffix of 'user' are included.
@@ -88,12 +88,13 @@ Note: Password Edit, Locking and Validation Status are disabled to Admins for se
 $search = (isset($_GET['search']) && $_GET['search'] !== '') ? $_GET['search'] : '%';
 $result = $userRepo->findAll($search);
 
-$itemPerPage = 50;
+$itemPerPage = 10;
 $total = $result !== FALSE ? count($result) : 0;
 $mod = $total % $itemPerPage;
 $maxPage = $mod == 0 ? $total / $itemPerPage : ($total - $mod) / $itemPerPage + 1;
 $maxPage = $total > 0 ? $maxPage : 1;
 $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] <= $maxPage && $_GET['page'] > 0) ? $page = $_GET['page'] : $page = 1;
+$page = (isset($_GET['page']) && $_GET['page'] == 'last') ? $maxPage : $page;
 
 if($total <= 0){
 	echo "<td colspan=\"0\" class=\"text-center\">Cannot Find Record</td>";
@@ -193,12 +194,12 @@ foreach($result as $user){
 	<td>
 		<select class="form-control" name="inputValid">
 			<option value="TRUE">Valid</option>
-			<option value="FALSE">Invalid</option>
+			<option value="FALSE" selected>Invalid</option>
 		</select>
 	</td>
 	<td>
 		<select class="form-control" name="inputAdmin">
-			<option value="-1">Locked</option>
+			<option value="-1" selected>Locked</option>
 			<option value="0">User</option>
 			<option value="1">Editor</option>
 			<option value="255">Site Admin</option>

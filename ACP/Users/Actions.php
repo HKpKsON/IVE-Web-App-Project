@@ -97,7 +97,7 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 	$user->valid = $_POST['inputValid'] == 'TRUE' ? TRUE : FALSE;
 		
 	$userRepo->adduser($user);
-	header('Location: /ACP/Users/');
+	header('Location: /ACP/Users/?page=last');
 	die();
 	
 }else{
