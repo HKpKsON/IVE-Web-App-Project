@@ -62,7 +62,7 @@ if($userRepo->find($_SESSION['uid'])->isAdmin != 255){
 ?>
 <p>
 Here you can view all the Email Verifications, you can filter only Valid or Non-Expired Verifications.<br />
-Data will be shown with 50 record per page.
+Data will be shown with 10 record per page.
 </p>
 <p class="text-right">
 <?php $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all' ?>
@@ -96,7 +96,7 @@ $verifyRepo = new VerificationsRepository($PDO);
 
 $result = (isset($_GET['search']) && $_GET['search'] !== '') ? array($verifyRepo->find($_GET['search'])) : $verifyRepo->findAll();
 
-$itemPerPage = 50;
+$itemPerPage = 10;
 $total = $result !== FALSE ? count($result) : 0;
 $mod = $total % $itemPerPage;
 $maxPage = $mod == 0 ? $total / $itemPerPage : ($total - $mod) / $itemPerPage + 1;
@@ -108,12 +108,12 @@ if($total <= 0){
 }else{
 	
 $i = 1;
+$filtered = 0;
 
 foreach($result as $validation){
-	$filter = (($filter == 'valid' && $validation->valid == 1) || ($filter == 'invalid' && $validation->valid == 0) || ($filter == 'nonexp' && strtotime($validation->expireDate) >= time()) || ($filter == 'exp' && strtotime($validation->expireDate) < time()) || $filter == 'all');
-	$filtered = 0;
+	$matchfilter = ($filter == 'all' || ($filter == 'valid' && $validation->valid == 1) || ($filter == 'invalid' && $validation->valid == 0) || ($filter == 'nonexp' && strtotime($validation->expireDate) >= time()) || ($filter == 'exp' && strtotime($validation->expireDate) < time()));
 	
-	if($i > (($page-1) * $itemPerPage) && $filter){
+	if($i > (($page-1) * $itemPerPage) && $matchfilter){
 ?>
 <tr><form action="Actions.php?action=edit&code=<?= $validation->code ?>" method="POST">
 	<td class="text-center">
@@ -143,13 +143,23 @@ foreach($result as $validation){
 	</td>
 </form></tr>
 <?php
-}elseif(!$filter){
-	$filtered .= 1;
-} } }
+}elseif(!$matchfilter){
+	$filtered++;
+}
 
+if($mod == 0 && $i > $page*$itemPerPage)
+	break;
+		
+if($mod != 0 && $i >= $page*$itemPerPage)
+	break;
+		
+$i++;
+
+}
 if($total == $filtered){
 	echo "<td colspan=\"0\" class=\"text-center\">All Record Filtered</td>";
-}
+} }
+
 ?>
 <tr><form action="Actions.php?action=add" method="POST">
 	<td class="text-center">
