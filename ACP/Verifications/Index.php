@@ -35,9 +35,13 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 <!-- This is the actual body -->
 <?php
 if(isset($_GET['success'])){
+	$action = isset($_GET['action']) && $_GET['action'] == 'add' ? 'Adding' : 'Action';
+	$action = isset($_GET['action']) && $_GET['action'] == 'edit' ? 'Editing' : $action;
+	$action = isset($_GET['action']) && $_GET['action'] == 'delete' ? 'Deletion' : $action;
+	
 	$msg = array(
-	'true' => '<strong>Verification Edited.</strong>',
-	'false' => '<strong>Verification Edition Failed.</strong>'
+	'true' => '<strong>Verification Record '.$action.' Success.</strong>',
+	'false' => '<strong>Verification Record '.$action.' Failed.</strong>'
 	);
 
 	if(isset($msg[$_GET['success']])){ ?>
@@ -61,11 +65,13 @@ Here you can view all the Email Verifications, you can filter only Valid or Non-
 Data will be shown with 50 record per page.
 </p>
 <p class="text-right">
-<a class="btn btn-default btn-sm" title="View All">View All</a>
-<a class="btn btn-default btn-sm" title="Valid Only">Valid Only</a>
-<a class="btn btn-default btn-sm" title="Invalid Only">Invalid Only</a>
-<a class="btn btn-default btn-sm" title="Non-Expired Onl">Non-Expired Only</a>
-<a class="btn btn-default btn-sm" title="Expired Only">Expired Only</a>
+<?php $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all' ?>
+<?php switch($filter){case 'valid': echo 'Fliter: Valid Only '; break; case 'invalid': echo 'Fliter: Invalid Only '; break; case 'nonexp': echo 'Fliter: Non-Expired Only '; break; case 'exp': echo 'Fliter: Expired Only '; break; default: ;}; ?> 
+<?php if($filter != 'all'){ ?><a href="?filter=all" class="btn btn-default btn-sm" title="View All">View All</a> <?php } ?>
+<?php if($filter == 'all'){ ?><a href="?filter=valid" class="btn btn-default btn-sm" title="Valid Only">Valid Only</a> <?php } ?>
+<?php if($filter == 'all'){ ?><a href="?filter=invalid" class="btn btn-default btn-sm" title="Invalid Only">Invalid Only</a> <?php } ?>
+<?php if($filter == 'all'){ ?><a href="?filter=nonexp" class="btn btn-default btn-sm" title="Non-Expired Onl">Non-Expired Only</a> <?php } ?>
+<?php if($filter == 'all'){ ?><a href="?filter=exp" class="btn btn-default btn-sm" title="Expired Only">Expired Only</a> <?php } ?>
 <form class="form-inline text-right" action="" method="GET">
 <label><h4>Search: </h4></label>
 <input type="text" class="form-control" id="search" name="search" placeholder="Search Code" value="<?= isset($_GET['search']) ? $_GET['search'] : ''?>">
@@ -76,7 +82,7 @@ Data will be shown with 50 record per page.
 </p>
 <table class="table table-condensed h5">
 <tr>
-	<th>ACTION</th>
+	<th class="text-center">ACTION</th>
 	<th>Code</th>
 	<th>User</th>
 	<th>Type</th>
@@ -104,14 +110,19 @@ if($total <= 0){
 $i = 1;
 
 foreach($result as $validation){
-
-	if($i > (($page-1) * $itemPerPage)){
+	$filter = (($filter == 'valid' && $validation->valid == 1) || ($filter == 'invalid' && $validation->valid == 0) || ($filter == 'nonexp' && strtotime($validation->expireDate) >= time()) || ($filter == 'exp' && strtotime($validation->expireDate) < time()) || $filter == 'all');
+	$filtered = 0;
+	
+	if($i > (($page-1) * $itemPerPage) && $filter){
 ?>
-<tr><form action="Actions.php?action=update&code=<?= $validation->code ?>" method="POST">
+<tr><form action="Actions.php?action=edit&code=<?= $validation->code ?>" method="POST">
 	<td class="text-center">
 		<button type="sumbit" class="btn btn-default btn-sm" title="Edit">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 		</button>
+		<a href="Actions.php?action=delete&code=<?= $validation->code ?>" class="btn btn-default btn-sm" title="Delete">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</a>
 	</td>
 	<td><?= $validation->code ?></td>
 	<td><?= $userRepo->find($validation->uid)->username ?></td>
@@ -126,12 +137,20 @@ foreach($result as $validation){
 	<td><?= strtotime($validation->expireDate) > time() ? 'No' : 'Yes' ?></td>
 	<td>
 		<select class="form-control" name="inputValid">
-			<option value="TRUE" <?= $validation->valid == '1' ? 'selected' : '' ?>>Valid</option>
-			<option value="FALSE" <?= $validation->valid == '0' ? 'selected' : '' ?>>Invalid</option>
+			<option value="1" <?= $validation->valid == '1' ? 'selected' : '' ?>>Valid</option>
+			<option value="0" <?= $validation->valid == '0' ? 'selected' : '' ?>>Invalid</option>
 		</select>
 	</td>
 </form></tr>
-<?php } } } ?>
+<?php
+}elseif(!$filter){
+	$filtered .= 1;
+} } }
+
+if($total == $filtered){
+	echo "<td colspan=\"0\" class=\"text-center\">All Record Filtered</td>";
+}
+?>
 <tr><form action="Actions.php?action=add" method="POST">
 	<td class="text-center">
 		<button type="sumbit" class="btn btn-default btn-sm" title="Create">
@@ -151,8 +170,8 @@ foreach($result as $validation){
 	<td>-</td>
 	<td>
 		<select class="form-control" name="inputValid">
-			<option value="TRUE">Valid</option>
-			<option value="FALSE">Invalid</option>
+			<option value="1">Valid</option>
+			<option value="0">Invalid</option>
 		</select>
 	</td>
 </form></tr>

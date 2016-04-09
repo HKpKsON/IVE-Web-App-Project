@@ -33,6 +33,7 @@ class UsersRepository extends RepositoryBase
         $stmt = $this->connection->prepare('
             SELECT * FROM users
 			WHERE username LIKE :keyword
+			ORDER BY creationDate DESC
         ');
 		$stmt->bindParam(':keyword', $keyword);
         $stmt->execute();

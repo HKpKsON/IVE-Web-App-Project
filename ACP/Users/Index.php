@@ -29,15 +29,19 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 <!-- This is the actual body -->
 <?php
 if(isset($_GET['success'])){
+	$action = (isset($_GET['action']) && $_GET['action'] == 'add') ? 'Adding' : 'Action';
+	$action = (isset($_GET['action']) && $_GET['action'] == 'edit') ? 'Editing' : $action;
+	$action = (isset($_GET['action']) && $_GET['action'] == 'delete') ? 'Deletion' : $action;
+	
 	$msg = array(
-	'true' => '<strong>User Profile Edited.</strong>',
-	'false' => '<strong>User Profile Edition Failed.</strong>'
+	'true' => '<strong>User Record '.$action.' Success.</strong>',
+	'false' => '<strong>User Record '.$action.' Failed.</strong>'
 	);
 
 	if(isset($msg[$_GET['success']])){ ?>
 	<div class="alert alert-warning alert-dismissible fade in" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<?= $msg[$_GET['success']]; ?>
+<?= $msg[$_GET['success']] ?>
 </div>
 <?php } unset($msg); } ?>
 <h1><?= $pageName ?></h1>
@@ -106,7 +110,7 @@ foreach($result as $user){
 
 	if($i > (($page-1) * $itemPerPage)){
 ?>
-<tr><form action="Actions.php?action=update&user=<?= $user->id ?>" method="POST">
+<tr><form action="Actions.php?action=edit&user=<?= $user->id ?>" method="POST">
 	<td class="text-center">
 		<button type="sumbit" class="btn btn-default btn-sm" title="Edit">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

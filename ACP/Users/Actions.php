@@ -15,14 +15,19 @@ $PDO = new PDO('mysql:host='.cfg::dbIP.':'.cfg::dbPort.';dbname='.cfg::dbName,cf
 
 $userRepo = new UsersRepository($PDO);
 
-if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'){
+if($userRepo->find($_SESSION['uid'])->isAdmin != 255){
+	header('Location: /ACP/Users/');
+	die();
+}
+
+if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'edit'){
 	// Action for Update
 	
 	$user = new Users;
 	$user = $userRepo->find($_GET['user']);
 
 	if($user === FALSE){
-		header('Location: /ACP/Users/?success=false');
+		header('Location: /ACP/Users/?success=false&action='.$_GET['action']);
 		die();
 	}else{
 		$user->password = ($user->isAdmin == 255 || $_POST['inputPassword'] == '') ? $user->password : $userRepo->hashnsalt($_POST['inputPassword'], $userRepo->saltgen());
@@ -57,10 +62,10 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 		$status = $userRepo->update($user);
 
 		if($status !== FALSE){
-			header('Location: /ACP/Users/?success=true');
+			header('Location: /ACP/Users/?success=true&action='.$_GET['action']);
 			die();
 		}else{
-			header('Location: /ACP/Users/?success=false');
+			header('Location: /ACP/Users/?success=false&action='.$_GET['action']);
 			die();
 		}
 	}
@@ -99,9 +104,14 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'update'
 	$user->isAdmin = (isset($_POST['inputAdmin']) && ($_POST['inputAdmin'] == -1 || $_POST['inputAdmin'] == 0 || $_POST['inputAdmin'] == 1 || $_POST['inputAdmin'] == 255)) ? $_POST['inputAdmin'] : -1;
 	$user->valid = $_POST['inputValid'] == 'TRUE' ? TRUE : FALSE;
 		
-	$userRepo->adduser($user);
-	header('Location: /ACP/Users/?page=last');
-	die();
+	$status = $userRepo->adduser($user);
+	if($status !== FALSE){
+		header('Location: /ACP/Users/?page=last&success=true&action='.$_GET['action']);
+		die();
+	}else{
+		header('Location: /ACP/Users/?page=last&success=false&action='.$_GET['action']);
+		die();
+	}
 	
 }else{
 	// Action for Anything Else

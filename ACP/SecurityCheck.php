@@ -37,6 +37,6 @@ if(!$logged){
 		header('Location: /ACP/Login.php?error=timeout');
 		die();
 	}else{
-		$_SESSION['sessionTime'] = time() + 15 * 60;
+		$_SESSION['sessionTime'] = time() + 30 * 60;
 	}
 }

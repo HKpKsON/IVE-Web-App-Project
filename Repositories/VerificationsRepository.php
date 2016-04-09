@@ -28,6 +28,7 @@ class VerificationsRepository extends RepositoryBase
     {
         $stmt = $this->connection->prepare('
             SELECT * FROM verifications
+			ORDER BY creationDate DESC
         ');
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS, '\Models\Verifications');
@@ -90,7 +91,7 @@ class VerificationsRepository extends RepositoryBase
             );
         }
         $stmt = $this->connection->prepare('
-            Delete FROM verification
+            Delete FROM verifications
             WHERE code = :code
         ');
         $stmt->bindParam(':code', $code);
