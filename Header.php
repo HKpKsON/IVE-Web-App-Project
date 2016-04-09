@@ -30,6 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 	<div id="header">
 		<!-- Desktop Topbar Start -->
 		<div id="desktop-topbar" class="row hidden-xs hidden-sm">
+			<div class="container">
 				<div class="col-md-2">
 					<div class="dropdown">
 						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -42,12 +43,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-7 text-left">
+				<div class="col-md-7 pull-left">
 					<span class="menu-li"><div class="Date"></div></span>
 					<span class="menu-li">Jobs | Events | Education Courses</span>
 					<span class="menu-li">Weather</span>
 				</div>
-				<div class="col-md-3 text-right">
+				<div class="col-md-3 pull-right">
 					<div id="login">
 						<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Login_Dialog.php'); ?>
 						<a href="#" class="btn btn-default" title="Follow on Facebook"><i class="fa fa-facebook"></i></a>
@@ -59,6 +60,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 				</div>
 				<!-- Navbar -->
 				<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Navbar.php') ?>
+			</div>
 		</div>
 		<!-- Desktop Topbar End -->
 		<!-- Mobile Topbar Start -->

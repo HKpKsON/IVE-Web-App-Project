@@ -12,6 +12,9 @@
 		<a href="/ACP/Users/" title="Users Management">Users Management</a>
 		</li>
 		<li>
+		<a href="/ACP/Verifications/" title="Email Verifications">Verifications</a>
+		</li>
+		<li>
 		<a href="/ACP/Logout.php" title="Logout ACP Only">Logout ACP</a>
 		</li>
 	</ul>
