@@ -35,7 +35,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 <!-- This is the actual body -->
 <?php
 if(isset($_GET['success'])){
-	$action = isset($_GET['action']) && $_GET['action'] == 'add' ? 'Adding' : 'Action';
+	$action = isset($_GET['action']) && $_GET['action'] == 'add' ? 'Creation' : 'Action';
 	$action = isset($_GET['action']) && $_GET['action'] == 'edit' ? 'Editing' : $action;
 	$action = isset($_GET['action']) && $_GET['action'] == 'delete' ? 'Deletion' : $action;
 	
@@ -47,7 +47,7 @@ if(isset($_GET['success'])){
 	if(isset($msg[$_GET['success']])){ ?>
 	<div class="alert alert-warning alert-dismissible fade in" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<?= $msg[$_GET['success']]; ?>
+<?= $msg[$_GET['success']] ?>
 </div>
 <?php } unset($msg); } ?>
 <h1><?= $pageName ?></h1>
@@ -82,7 +82,7 @@ Data will be shown with 10 record per page.
 </p>
 <table class="table table-condensed h5">
 <tr>
-	<th class="text-center">ACTION</th>
+	<th class="text-center" width="120">ACTION</th>
 	<th>Code</th>
 	<th>User</th>
 	<th>Type</th>

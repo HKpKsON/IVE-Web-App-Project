@@ -29,9 +29,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/Header.php');
 <!-- This is the actual body -->
 <?php
 if(isset($_GET['success'])){
-	$action = (isset($_GET['action']) && $_GET['action'] == 'add') ? 'Adding' : 'Action';
-	$action = (isset($_GET['action']) && $_GET['action'] == 'edit') ? 'Editing' : $action;
-	$action = (isset($_GET['action']) && $_GET['action'] == 'delete') ? 'Deletion' : $action;
+	$action = isset($_GET['action']) && $_GET['action'] == 'add' ? 'Creation' : 'Action';
+	$action = isset($_GET['action']) && $_GET['action'] == 'edit' ? 'Editing' : $action;
+	// $action = isset($_GET['action']) && $_GET['action'] == 'delete' ? 'Deletion' : $action;
 	
 	$msg = array(
 	'true' => '<strong>User Record '.$action.' Success.</strong>',
@@ -70,22 +70,18 @@ Note: Password Edit, Locking and Validation Status are disabled to Admins for se
 <button type="sumbit" class="btn btn-default" title="Search">
 	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 </button>
+<a class="btn btn-default" title="Clear Search" href="?search=">
+	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+</a>
 </form>
 <table class="table table-condensed h5">
 <tr>
-	<th>ACTION</th>
+	<th class="text-center" width="120">ACTION</th>
 	<th>UID</th>
 	<th>Username</th>
-	<th>Password</th>
-	<th>Salutation</th>
+	<th>Full Name</th>
 	<th>Display Name</th>
 	<th>Email</th>
-	<th>Address</th>
-	<th>Full Name</th>
-	<th>Phone No.</th>
-	<th>Country</th>
-	<th>If Valid</th>
-	<th>User Groups</th>
 </tr>
 <!-- User Edit -->
 <?php
@@ -101,7 +97,7 @@ $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] <= $
 $page = (isset($_GET['page']) && $_GET['page'] == 'last') ? $maxPage : $page;
 
 if($total <= 0){
-	echo "<td colspan=\"0\" class=\"text-center\">Cannot Find Record</td>";
+	echo "<td colspan=\"6\" class=\"text-center\">Cannot Find Record</td>";
 }else{
 	
 $i = 1;
@@ -110,27 +106,53 @@ foreach($result as $user){
 
 	if($i > (($page-1) * $itemPerPage)){
 ?>
-<tr><form action="Actions.php?action=edit&user=<?= $user->id ?>" method="POST">
+<tr>
 	<td class="text-center">
-		<button type="sumbit" class="btn btn-default btn-sm" title="Edit">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-		</button>
+		<a class="btn btn-default btn-sm formtoggle" title="Edit">
+			<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+		</a>
 	</td>
 	<td><?= $user->id ?></td>
 	<td><?= $user->username ?></td>
-	<td><input type="text" class="form-control inputPassword" name="inputPassword" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
+	<td><?= $user->fullname ?></td>
+	<td><?= $user->displayname ?></td>
+	<td><?= $user->email ?></td>
+</tr>
+<tr>
+<form action="Actions.php?action=edit&user=<?= $user->id ?>" method="POST">
+	<td class="text-center">
+		<button type="sumbit" class="btn btn-default btn-sm" title="Save">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+		</button>
+	</td>
+	<td><input type="text" class="form-control inputPassword" name="inputPassword" title="Change Password" <?= $user->isAdmin == 255 ? 'placeholder="Disabled" disabled' : 'placeholder="New Password"'?>></td>
 	<td>
-		<select class="form-control" name="inputSalutation">
+		<select class="form-control" name="inputSalutation" title="Salutation">
 			<option value="MR" <?= $user->salutation == 'Mr.' ? 'selected' : '' ?>>Mr.</option>
 			<option value="MRS" <?= $user->salutation == 'Mrs.' ? 'selected' : '' ?>>Mrs.</option>
 			<option value="MS" <?= $user->salutation == 'Ms.' ? 'selected' : '' ?>>Ms.</option>
 		</select>
 	</td>
-	<td><input type="text" class="form-control inputDisplayName" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
-	<td><input type="text" class="form-control inputEmail" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
-	<td><input type="text" class="form-control inputAddress" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
-	<td><input type="text" class="form-control inputFullName" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
-	<td><input type="text" class="form-control inputPhone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
+	<td><input type="text" class="form-control inputFullName" title="Full Name" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
+	<td><input type="text" class="form-control inputDisplayName" title="Display Name" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
+	<td><input type="email" class="form-control inputEmail" title="Email Address" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
+</tr><tr>
+	<td>&nbsp;</td>
+	<td>
+		<select class="form-control" name="inputValid" title="Valid Account?" <?= $user->isAdmin == 255 ? ' disabled' : ''?>>
+			<option value="TRUE" <?= $user->valid == '1' ? 'selected' : '' ?>>Valid</option>
+			<option value="FALSE" <?= $user->valid == '0' ? 'selected' : '' ?>>Invalid</option>
+		</select>
+	</td>
+	<td>
+		<select class="form-control" name="inputAdmin" title="User Group">
+			<option value="-1" <?= $user->isAdmin == '-1' ? 'selected' : '' ?> <?= $user->isAdmin == 255 ? ' disabled' : ''?>>Locked</option>
+			<option value="0" <?= $user->isAdmin == '0' ? 'selected' : '' ?>>User</option>
+			<option value="1" <?= $user->isAdmin == '1' ? 'selected' : '' ?>>Editor</option>
+			<option value="255" <?= $user->isAdmin == '255' ? 'selected' : '' ?>>Site Admin</option>
+		</select>
+	</td>
+	<td><input type="text" class="form-control inputPhone" title="Phone" name="inputPhone" placeholder="Phone No." value="<?= $user->phone ?>"></td>
 	<td>
 		<?php
 			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
@@ -138,20 +160,7 @@ foreach($result as $user){
 			$countrylist->displayForm($user->country);
 		?>
 	</td>
-	<td>
-		<select class="form-control" name="inputValid"<?= $user->isAdmin == 255 ? ' disabled' : ''?>>
-			<option value="TRUE" <?= $user->valid == '1' ? 'selected' : '' ?>>Valid</option>
-			<option value="FALSE" <?= $user->valid == '0' ? 'selected' : '' ?>>Invalid</option>
-		</select>
-	</td>
-	<td>
-		<select class="form-control" name="inputAdmin">
-			<option value="-1" <?= $user->isAdmin == '-1' ? 'selected' : '' ?> <?= $user->isAdmin == 255 ? ' disabled' : ''?>>Locked</option>
-			<option value="0" <?= $user->isAdmin == '0' ? 'selected' : '' ?>>User</option>
-			<option value="1" <?= $user->isAdmin == '1' ? 'selected' : '' ?>>Editor</option>
-			<option value="255" <?= $user->isAdmin == '255' ? 'selected' : '' ?>>Site Admin</option>
-		</select>
-	</td>
+	<td><input type="text" class="form-control inputAddress" title="Address" name="inputAddress" placeholder="New Address" value="<?= $user->address ?>"></td>
 </form></tr>
 <?php
 		}
@@ -167,13 +176,16 @@ foreach($result as $user){
 }
 ?>
 <!-- Add New User -->
-<tr><form action="Actions.php?action=add" method="POST">
+<form action="Actions.php?action=add" method="POST">
+<tr>
 	<td class="text-center">
 		<button type="sumbit" class="btn btn-default btn-sm" title="Add User">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 		</button>
+		<a class="btn btn-default btn-sm formtoggle" title="Edit">
+			<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+		</a>
 	</td>
-	<td>New</td>
 	<td><input type="text" class="form-control inputUsername" name="inputUsername" placeholder="New Username" required></td>
 	<td><input type="text" class="form-control inputPassword" name="inputPassword" placeholder="New Password"></td>
 	<td>
@@ -184,17 +196,8 @@ foreach($result as $user){
 		</select>
 	</td>
 	<td><input type="text" class="form-control inputDisplayName" name="inputDisplayName" placeholder="New Display Name"></td>
-	<td><input type="text" class="form-control inputEmail" name="inputEmail" placeholder="New Email"></td>
-	<td><input type="text" class="form-control inputAddress" name="inputAddress" placeholder="New Address"></td>
-	<td><input type="text" class="form-control inputFullName" name="inputFullName" placeholder="Full Name"></td>
-	<td><input type="text" class="form-control inputPhone" name="inputPhone" placeholder="Phone No."></td>
-	<td>
-		<?php
-			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
-			$countrylist = new Countries;
-			$countrylist->displayForm();
-		?>
-	</td>
+	<td><input type="email" class="form-control inputEmail" name="inputEmail" placeholder="New Email"></td>
+</tr><tr>
 	<td>
 		<select class="form-control" name="inputValid">
 			<option value="TRUE">Valid</option>
@@ -209,7 +212,17 @@ foreach($result as $user){
 			<option value="255">Site Admin</option>
 		</select>
 	</td>
-</form></tr>
+	<td><input type="text" class="form-control inputFullName" name="inputFullName" placeholder="Full Name"></td>
+	<td><input type="text" class="form-control inputPhone" name="inputPhone" placeholder="Phone No."></td>
+	<td>
+		<?php
+			include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Countries.php');
+			$countrylist = new Countries;
+			$countrylist->displayForm();
+		?>
+	</td>
+	<td><input type="text" class="form-control inputAddress" name="inputAddress" placeholder="New Address"></td>
+</tr></form>
 </table>
 <nav>
   <ul class="pager">
@@ -223,6 +236,7 @@ foreach($result as $user){
 function bodyEndExtra()
 {
     ?>
+	<script src="/ACP/Includes/js/form.js"></script>
     <script>
         console.log("This is Body End code");
     </script>

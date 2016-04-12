@@ -104,12 +104,13 @@ if(isset($_GET['action']) && isset($_GET['user']) && $_GET['action'] == 'edit'){
 	$user->isAdmin = (isset($_POST['inputAdmin']) && ($_POST['inputAdmin'] == -1 || $_POST['inputAdmin'] == 0 || $_POST['inputAdmin'] == 1 || $_POST['inputAdmin'] == 255)) ? $_POST['inputAdmin'] : -1;
 	$user->valid = $_POST['inputValid'] == 'TRUE' ? TRUE : FALSE;
 		
-	$status = $userRepo->adduser($user);
-	if($status !== FALSE){
+	$result = $userRepo->adduser($user);
+	
+	if($result == -1){
 		header('Location: /ACP/Users/?page=last&success=true&action='.$_GET['action']);
 		die();
 	}else{
-		header('Location: /ACP/Users/?page=last&success=false&action='.$_GET['action']);
+		header('Location: /ACP/Users/?success=false&action='.$_GET['action']);
 		die();
 	}
 	
