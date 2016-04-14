@@ -34,7 +34,7 @@ if(!isset($_SESSION['uid'])){
 		
 		// Only Change Password if user actually give a new password
 		if($_POST['inputPassword'] != ''){
-			if($_POST['inputPassword'] !== $_POST['inputConPassword']){
+			if($_POST['inputPassword'] !== $_POST['inputConPassword'] || strlen($_POST['inputPassword']) < 6){
 				header("Location: ?error=password");
 				die();
 			}else{
