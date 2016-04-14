@@ -108,7 +108,7 @@ foreach($result as $user){
 ?>
 <tr>
 	<td class="text-center">
-		<a class="btn btn-default btn-sm formtoggle" title="Edit">
+		<a class="btn btn-default btn-sm formtoggle" title="Edit Panel">
 			<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 		</a>
 	</td>
@@ -236,7 +236,7 @@ foreach($result as $user){
 function bodyEndExtra()
 {
     ?>
-	<script src="/ACP/Includes/js/form.js"></script>
+	<script src="Includes/js/form.js"></script>
     <script>
         console.log("This is Body End code");
     </script>

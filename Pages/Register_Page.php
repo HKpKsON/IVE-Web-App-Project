@@ -17,7 +17,7 @@ function headerExtra()
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
 <div class="container">
-	<form class="form-register" action="?action=register" method="POST">
+	<form id="form-register" action="?action=register" method="POST">
 		<h2 class="form-register-heading"><?= $pageName ?></h2>
 		<hr />
 		<?php
@@ -43,18 +43,21 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 			unset($errormsg);
 		}
 		?>
-		<div id="error-dialog"></div>
+		<div id="error-dialog" class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<span class="errormsg"></span>
+		</div>
 		<div class="col-md-6">
 			<label for="inputUsername"><h3>Username</h3></label>
-			<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" type="text" required="" value="<?= isset($refer) ? $refer['username']: ''; ?>">
+			<input id="inputRegUsername" name="inputUsername" class="form-control" placeholder="Username" type="text" required="" value="<?= isset($refer) ? $refer['username']: ''; ?>">
 			<label for="inputEmail"><h3>Email</h3></label>
-			<input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" type="email" required="" value="<?= isset($refer) ? $refer['email']: ''; ?>">
+			<input id="inputRegEmail" name="inputEmail" class="form-control" placeholder="Email" type="email" required="" value="<?= isset($refer) ? $refer['email']: ''; ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword"><h3>Password</h3></label>
-			<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" type="password" required="">
+			<input id="inputRegPassword" name="inputPassword" class="form-control" placeholder="Password" type="password" required="">
 			<label for="inputConPassword"><h3>Confirm Password</h3></label>
-			<input id="inputConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" type="password" required="">
+			<input id="inputRegConPassword" name="inputConPassword" class="form-control" placeholder="Confirm Password" type="password" required="">
 		</div>
 		<div class="col-md-12"><hr /></div>
 		<div class="col-md-6">
@@ -85,7 +88,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		</div>
 		<div class="col-md-12">
 			<hr />
-			<button class="btn btn-lg btn-default btn-block" type="submit">Register</button>
+			<button class="btn btn-lg btn-default btn-block formsubmit" type="submit">Register</button>
 		</div>
 	</form>
 </div>
@@ -94,7 +97,6 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 function bodyEndExtra()
 {
     ?>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
 	<script src="Includes/js/register.js"></script>
     <script>
         console.log("This is Body End code");

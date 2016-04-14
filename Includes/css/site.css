@@ -42,3 +42,11 @@ body {
 	margin-top: 6.5em;
 	margin-bottom: 1.5em;
 }
+
+.error {
+	background-color: #faa;
+}
+
+.correct {
+	background-color: #afa;
+}
