@@ -41,16 +41,16 @@ if(isset($_SESSION['uid'])){
 				<hr />
 				<form class="form-signin-dialog" action="Login.php?action=login" method="POST">
 						<label for="inputUsername" class="sr-only">Login</label>
-						<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
+						<input id="inputLoginUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
 						<label for="inputPassword" class="sr-only">Password</label>
-						<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+						<input id="inputLoginPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
 						<div class="checkbox row">
 							<div class="col-md-6 text-left">
 								<a href="/FogetPassword.php">Forget Password?</a>
 							</div>
 							<div class="col-md-6 text-right">
 								<label>
-									<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
+									<input id="inputLoginRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
 								</label>
 							</div>
 							<br />

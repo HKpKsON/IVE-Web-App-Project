@@ -30,6 +30,10 @@ function headerExtra()
 
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 ?>
+<div id="error-dialog" class="alert alert-danger alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<span class="errormsg"></span>
+</div>
 <div class="container">
 	<form class="form-profile" action="?action=update" method="POST">
 		<h2 class="form-profile-heading"><?= $pageName ?></h2>
@@ -55,12 +59,11 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
 		<?php
 			if(isset($_GET['success']) && $_GET['success'] == 'true'){
 		?>
-		<div class="alert alert-success alert-dismissible fade in">
+		<div class="alert alert-success alert-dismissible fade in" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<strong>Done!</strong> Profile updated successfully!
 		</div>
 		<?php } ?>
-		<div id="error-dialog"></div>
 		<div class="col-md-6">
 			<label for="inputDisplayName"><h3>Display Name</h3></label>
 			<input id="inputDisplayName" name="inputDisplayName" class="form-control" placeholder="How To Call You?" type="text" value="<?= $user->displayname ?>">

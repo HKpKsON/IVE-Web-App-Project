@@ -136,7 +136,8 @@ foreach($result as $user){
 	<td><input type="text" class="form-control inputFullName" title="Full Name" name="inputFullName" placeholder="Full Name" value="<?= $user->fullname ?>"></td>
 	<td><input type="text" class="form-control inputDisplayName" title="Display Name" name="inputDisplayName" placeholder="New Display Name" value="<?= $user->displayname ?>"></td>
 	<td><input type="email" class="form-control inputEmail" title="Email Address" name="inputEmail" placeholder="New Email" value="<?= $user->email ?>"></td>
-</tr><tr>
+</tr>
+<tr>
 	<td>&nbsp;</td>
 	<td>
 		<select class="form-control" name="inputValid" title="Valid Account?" <?= $user->isAdmin == 255 ? ' disabled' : ''?>>

@@ -36,12 +36,12 @@ if(isset($_SESSION['uid'])){
 				<hr />
 				<form class="form-signin-dialog" action="Login.php?action=login" method="POST">
 						<label for="inputUsername" class="sr-only">Login</label>
-						<input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
+						<input id="inputLogSMUsername" name="inputUsername" class="form-control" placeholder="Username / Email" required="" autofocus="" type="text" value="<?= $cookieName ?>">
 						<label for="inputPassword" class="sr-only">Password</label>
-						<input id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+						<input id="inputLogSMPassword" name="inputPassword" class="form-control" placeholder="Password" required="" type="password">
 						<div class="checkbox">
 						  <label>
-							<input id="inputRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
+							<input id="inputLogSMRemember" name="inputRemember" value="remember-me" type="checkbox"> Remember me
 						  </label>
 						  <a class="text-right" href="/FogetPassword.php">Forget Password?</a>
 						</div>
