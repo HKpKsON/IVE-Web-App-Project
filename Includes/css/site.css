@@ -12,8 +12,36 @@ body {
 	margin-top: 2.5%;
 }
 
-.Date {
+.Date,
+.Weather,
+.Forecast {
 	display: inline-block;
+}
+
+.Weather {
+	font-size: 2.2em;
+}
+
+.Weather::after {
+	content: ' °C';
+}
+
+.Forecast {
+	width: 1440px;
+}
+
+.fcwarp {
+	overflow: scroll;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.fc-items {
+	float: left;
+	display:inline;
+	width: 120px;
+	height: 170px;
 }
 
 .menu-li {

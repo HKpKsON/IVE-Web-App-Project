@@ -46,7 +46,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 				<div class="col-md-7 pull-left">
 					<span class="menu-li"><div class="Date"></div></span>
 					<span class="menu-li">Jobs | Events | Education Courses</span>
-					<span class="menu-li">Weather</span>
+					<span class="menu-li"><div class="Weather" title="Provided By: http://openweathermap.org"></div></span><!-- Provided By: http://openweathermap.org -->
 				</div>
 				<div class="col-md-3 pull-right">
 					<div id="login">

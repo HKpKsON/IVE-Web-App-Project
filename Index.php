@@ -24,42 +24,7 @@ function headerExtra()
 }
 ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php'); ?>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Weather_Box.php'); ?>
 <?php
 //If you need add javascript before the end of body!
 function bodyEndExtra()
