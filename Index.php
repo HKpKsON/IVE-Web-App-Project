@@ -19,11 +19,12 @@ $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::si
 function headerExtra()
 {
     ?>
-
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
     <?php
 }
 ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php'); ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/ListNews.php'); ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] .'/Pages/Weather_Box.php'); ?>
 <?php
 //If you need add javascript before the end of body!

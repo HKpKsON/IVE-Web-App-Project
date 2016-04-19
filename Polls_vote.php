@@ -22,13 +22,13 @@ if(isset($_GET['choose']) && isset($_GET['id']))
 		{
 			$poll->yes +=1;
 			$conn->save($poll);
-			header("Location: /Polls_show.php?id=".$poll->id);
+			header("Location: /Polls_showone.php?id=".$poll->id);
 		}
 		else if($choose === 'no')
 		{
 			$poll->no +=1;
 			$conn->save($poll);
-			header("Location: /Polls_show.php?id=".$poll->id);
+			header("Location: /Polls_showone.php?id=".$poll->id);
 		}
 		else
 			echo "error choose";

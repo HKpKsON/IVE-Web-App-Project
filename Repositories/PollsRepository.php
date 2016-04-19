@@ -32,6 +32,7 @@ class PollsRepository extends RepositoryBase
     {
         $stmt = $this->connection->prepare('
             SELECT * FROM polls
+			ORDER BY id DESC
         ');
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS, '\Models\Polls');

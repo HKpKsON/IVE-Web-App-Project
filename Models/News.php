@@ -4,11 +4,19 @@ include_once "ModelBase.php";
 
 class News extends ModelBase
 {
-	public $title;
-	public $subtitle;
-	public $publishdate;
-	public $lastupdate;
-	public $author;
-	public $content;
-	public $tags;
+    public $author;
+    public $title;
+    public $text;
+    public $category;
+    public $new_date;
+}
+class Reviews extends ModelBase
+{
+    public $com_author;
+    public $com_text;
+    public $com_date;
+    public $com_id;
+    public $new_id;
+
+
 }
