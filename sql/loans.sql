@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2016 at 08:46 AM
+-- Generation Time: Apr 20, 2016 at 08:55 AM
 -- Server version: 5.6.13
 -- PHP Version: 5.4.17
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
-CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `project`;
 
 -- --------------------------------------------------------
 
@@ -43,16 +41,14 @@ CREATE TABLE IF NOT EXISTS `loans` (
 --
 
 INSERT INTO `loans` (`id`, `logo`, `url`, `content`, `type`, `createdate`) VALUES
-(2, 'LOGO', 'URL', 'CONTENT', 'Personal', '2016-03-19 19:19:14'),
-(3, 'LOGO2', 'URL2', 'CONTENT2^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', 'Mortgage', '2016-03-19 19:19:59'),
-(4, 'logo3', 'url3', 'content3', 'Mortgage', '2016-03-20 06:15:14'),
-(5, 'logo', 'url', 'content', 'Mortgage', '2016-03-21 09:15:25'),
-(6, 'url2', 'url2', 'url2', 'Mortgage', '2016-03-21 09:15:59'),
-(7, 'url4', 'url4', 'url4', 'Mortgage', '2016-03-21 09:17:04'),
-(8, 'test', 'http://xx', '', 'Mortgage', '2016-04-14 13:50:17'),
-(13, NULL, 'http://google.com/', 'qwadasda', 'Mortgage', '2016-04-15 06:52:18'),
-(14, NULL, 'http://google.com/', '', 'Mortgage', '2016-04-15 06:52:26'),
-(15, NULL, 'http://google.com/', '', 'Credit', '2016-04-15 06:53:18'),
+(2, 'yMAV8ci57GrquPLhHJtvIZhr0GqVypBi.png', 'http://google.com', 'CONTENT', 'Personal', '2016-03-19 19:19:14'),
+(3, 'LSu1y3C3b8k3u5bIOojg0ZhqoocpRwEW.png', 'http://google.com', 'CONTENT2^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', 'Personal', '2016-03-19 19:19:59'),
+(4, 'HSJeNp20sBFuzqcorkKVViTOnNIhCNQ3.png', 'http://google.com', 'content3', 'Personal', '2016-03-20 06:15:14'),
+(5, '1LlkpEPQ7XnN1DAWr9ysetR5I5C2LWq2.png', 'http://google.com', 'content', 'Personal', '2016-03-21 09:15:25'),
+(6, 'IwlioMZx9btZRIlmOQJRTxddrfTFhXmT.png', 'http://google.com', 'url2', 'Mortgage', '2016-03-21 09:15:59'),
+(7, 'Oh3qKRuCQh7K45G9TqnGgQVEFsyW4RYR.png', 'http://google.com', 'url4', 'Mortgage', '2016-03-21 09:17:04'),
+(8, 'W9phfUzxseGsxJtpXt9eH4rfcCxktGcN.png', 'http://google.com/ 	', '', 'Mortgage', '2016-04-14 13:50:17'),
+(13, 'WoCwBkwOVz7xSJ92UUO9ZGPeC8q6KTj7.png', 'http://google.com/', 'qwadasda', 'Mortgage', '2016-04-15 06:52:18'),
 (18, 'eAqSeAwDKIIWmHoi9LmDKCYreu4Ga60P.jpg', 'http://google.com/', '', 'Credit', '2016-04-15 06:58:33');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

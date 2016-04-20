@@ -63,12 +63,12 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
         <table class="table">
             <thead>
             <tr>
-                <th>action</th>
-                <th>id</th>
-                <th>type</th>
-                <th>url</th>
-                <th>logo</th>
-                <th>content</th>
+                <th>ACTION</th>
+                <th>ID</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Logo</th>
+                <th>Content</th>
             </tr>
             </thead>
             <tbody>

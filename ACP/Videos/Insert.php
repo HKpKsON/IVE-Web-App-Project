@@ -40,7 +40,7 @@ if($userRepo->find($_SESSION['uid'])->isAdmin == 255){
 		$Video = new Videos;
 		
 		switch($_POST['type']){
-            case 'Hong Kong':
+            case 'HongKong':
                 $Video->type = 'HongKong';
                 break;
             case 'China':

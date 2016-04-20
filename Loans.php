@@ -15,7 +15,7 @@ function ShowLoan($Loan){
 
 		<div class="col col-md-3 text-center">
 			<a href="<?= $Loan->url ?>" target="_blank">
-			<img src="<?= $Loan->logo ?>" /><br />
+			<img src="/Uploads/<?= $Loan->logo ?>" width="240" /><br />
 			<p style="word-break : break-all"><?= $Loan->content ?></p>
 			</a>
 		</div>

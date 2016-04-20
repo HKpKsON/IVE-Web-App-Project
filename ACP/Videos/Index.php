@@ -62,12 +62,12 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
         <table class="table">
             <thead>
             <tr>
-                <th>action</th>
-                <th>id</th>
-                <th>type</th>
-                <th>video</th>
-                <th>title</th>
-                <th>content</th>
+                <th>ACTION</th>
+                <th>VID</th>
+                <th>Type</th>
+                <th>Video</th>
+                <th>Title</th>
+                <th>Content</th>
             </tr>
             </thead>
             <tbody>
@@ -87,7 +87,11 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
 						</td>
 						<td><?=$Video->id ?></td>
 						<td><?=$Video->type ?></td>
-						<td><iframe width="300" height="140" src="https://www.youtube.com/embed/<?=$Video->video ?>" frameborder="0" allowfullscreen></iframe></td>
+						<td>
+						<a href="https://www.youtube.com/watch?v=<?= $Video->id ?>">
+							<img src="http://img.youtube.com/vi/<?= $Video->video ?>/mqdefault.jpg" height="120" />
+						</a>
+						</td>
 						<td><?=$Video->title ?></td>
 						<td><?=$Video->content ?></td>
 					</tr>
@@ -101,9 +105,9 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
 								<option value="HongKong" <?= $Video->type == "HongKong" ? "selected" : "" ?>>Hong Kong</option>
 								<option value="Asia" <?= $Video->type == "Asia" ? "selected" : "" ?>>Asia</option>
 							</select></td>
-						<td><input class="form-control" type="url" name="video" value="<?= $Video->video ?>" required></td>
-						<td><input class="form-control" type="text" name="title"></td>
-						<td><textarea class="form-control" rows="4" name="content"></textarea></td>
+						<td><input class="form-control" type="url" name="video" value="https://www.youtube.com/watch?v=<?= $Video->video ?>" required></td>
+						<td><input class="form-control" type="text" name="title" value="<?= $Video->title ?>"></td>
+						<td><textarea class="form-control" rows="4" name="content" placeholder="<?= $Video->content ?>"></textarea></td>
 						</form>
 					</tr>
 				<?php
@@ -118,10 +122,10 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
                     <td>ID</td>
                     <td><select class="form-control" name='type'>
                             <option value="China" >China</option>
-                            <option value="HongKong" >Hong Kong</option>
-                            <option value="Asia" >Asia</option>
+                            <option value="HongKong">Hong Kong</option>
+                            <option value="Asia">Asia</option>
                         </select></td>
-                    <td><input class="form-control" type="url" name="video"  required></td>
+                    <td><input class="form-control" type="url" name="video" required></td>
                     <td><input class="form-control" type="text" name="title"></td>
                     <td><textarea class="form-control" rows="4" name="content"></textarea></td>
 				</form>

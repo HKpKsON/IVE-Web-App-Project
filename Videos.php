@@ -13,7 +13,7 @@ function ShowVideo($Video){
     ?>
     <p>
 		<div class="col col-xs-4 col-sm-4 col-md-4 text-center">
-			<a href="/ShowVideos?id=<?= $Video->id ?>" target="_blank">
+			<a href="/Videos.php?vid=<?= $Video->id ?>&type=<?= isset($_GET['type']) ? $_GET['type'] : '' ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : '' ?>" title="<?= $Video->title . " | SCMP.TV" ?>">
 				<img class="hidden-xs hidden-sm" src="http://img.youtube.com/vi/<?= $Video->video ?>/mqdefault.jpg" />
 				<img class="hidden-md hidden-lg" src="http://img.youtube.com/vi/<?= $Video->video ?>/default.jpg" />
 			</a>
@@ -44,7 +44,7 @@ if( !isset($_GET['type']) || array_search($_GET['type'], $types) === FALSE ){
 
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
-$pageName = 'Video';
+$pageName = 'Videos';
 
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . " | " . cfg::siteName . " (School Project)";
@@ -58,17 +58,21 @@ function headerExtra()
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Header.php');
-$vid = isset($_GET['video']) ? $_GET['video'] : $Repo->findAll($_GET['type'])[0]->id;
+$vid = isset($_GET['vid']) ? $_GET['vid'] : $Repo->findAll($_GET['type'])[0]->id;
+$onDisplay = $Repo->find($vid);
 ?>
 <div class="container">
     <!-- 16:9 aspect ratio -->
 	<div class="jumbotrom">
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $Repo->find($vid)->video ?>"></iframe>
-    </div>
-	
+		<h1><?= $onDisplay->title ?></h1><hr />
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $onDisplay->video ?>"></iframe>
+		</div><br />
+		<div class="well">
+			<h2>Descriptions</h1><hr />
+			<p class="h4"><?= $onDisplay->content ?></p>
+		</div>
 	</div>
-
     <ul class="nav nav-tabs">
         <?php
         foreach ($types as $type) {

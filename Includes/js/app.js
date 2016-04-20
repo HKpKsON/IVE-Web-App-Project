@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$('.Date').html("<strong>" + dayNames[newDate.getDay()] + "</strong> " + monthNames[newDate.getMonth()] + ' ' + newDate.getDate() + ' ,' + newDate.getFullYear());
 
 	// Top Weather DIV
-	var getWeather = $.get( "http://api.openweathermap.org/data/2.5/weather?q=hk&units=metric", "json" );
+	var getWeather = $.get( "http://api.openweathermap.org/data/2.5/weather?q=hk&units=metric&appid=13c81a68eb47d0441a26b3f74543f2c2", "json" );
 	getWeather.done(function(data){
 		var tempinc = data.main.temp;
 		tempinc = parseFloat(tempinc).toFixed(0);
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	}
 	
 	if($('.Forecast').length > 0){
-		var getForecast = $.get( "http://api.openweathermap.org/data/2.5/forecast/daily?q=HongKong&units=metric&cnt=16", "json" );
+		var getForecast = $.get( "http://api.openweathermap.org/data/2.5/forecast/daily?q=HongKong&units=metric&cnt=16&appid=13c81a68eb47d0441a26b3f74543f2c2", "json" );
 		getForecast.done(function(data){
 			var html = "";
 			
