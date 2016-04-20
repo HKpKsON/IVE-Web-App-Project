@@ -88,7 +88,7 @@ if ($userRepo->find($_SESSION['uid'])->isAdmin != 255) {
 						<td><?=$Video->id ?></td>
 						<td><?=$Video->type ?></td>
 						<td>
-						<a href="https://www.youtube.com/watch?v=<?= $Video->id ?>">
+						<a href="https://www.youtube.com/watch?v=<?= $Video->video ?>" target="_blank">
 							<img src="http://img.youtube.com/vi/<?= $Video->video ?>/mqdefault.jpg" height="120" />
 						</a>
 						</td>
