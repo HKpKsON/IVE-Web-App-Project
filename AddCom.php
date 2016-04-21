@@ -1,7 +1,4 @@
 <?php
-// Security Check
-include_once($_SERVER['DOCUMENT_ROOT'] .'/ACP/SecurityCheck.php');
-
 date_default_timezone_set("Asia/Hong_Kong");
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Models/News.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Repositories/NewsRepository.php";

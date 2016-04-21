@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
 
-$pageName = 'AllPolls';
+$pageName = 'Polls';
 
 //Set up page title!
 $title = (isset($pageName) ? $pageName : cfg::defaultPageName) . ' | ' . cfg::siteName . ' (School Project)';
@@ -102,9 +102,9 @@ function ShowSmallPoll($poll){
 }
 ?>
 <div class="container">
-<div class="col-md-12">
 <h2>Today's Poll</h2>
-</div>
+<hr />
+<div class="container">
 <?php
 $conn = new PollsRepository();
 $polls = new Polls;
@@ -126,6 +126,7 @@ foreach($polls as $poll) {
 	$i++;
 }
 ?>
+</div>
 </div>
 <?php
 //If you need add javascript before the end of body!

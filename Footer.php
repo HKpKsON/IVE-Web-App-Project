@@ -1,4 +1,5 @@
 <!--Footer Start-->
+	<div style="padding-top: 32px;"></div>
 	<iframe src="/Loans.php" frameborder="0" width="100%" height="320"></iframe>
 	<div class="footer-bottom">
 		<div class="container">

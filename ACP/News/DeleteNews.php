@@ -11,4 +11,4 @@ use Repositories\NewsRepository;
 $newsRepository = new NewsRepository();
 $news = $newsRepository->destroy($_GET['id']);
 
-header("Location: /ListNews.php");
+header("Location: /ACP/News/");

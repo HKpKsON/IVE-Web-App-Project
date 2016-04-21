@@ -1,4 +1,6 @@
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'] .'/Config.php');
+
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Repositories/UsersRepository.php');
 include_once($_SERVER['DOCUMENT_ROOT'] .'/Models/Users.php');
 
